@@ -106,32 +106,32 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
     }
 
     @Override
-    public int CalculateCountPassengers(int cruiseID) {
+    public int calculateCountPassengers(int cruiseID) {
         return 0;
     }
 
     @Override
-    public int CountNumberEmptySeats(int cruiseID) {
+    public int countNumberEmptySeats(int cruiseID) {
         return 0;
     }
 
     @Override
-    public Map<Excursion, Integer> FindExcursions(int cruiseID) {
+    public Map<Excursion, Integer> findExcursions(int cruiseID) {
         return null;
     }
 
     @Override
-    public List<Excursion> FindCruiseExcursions(int cruiseID) {
+    public List<Excursion> findCruiseExcursions(int cruiseID) {
         return null;
     }
 
     @Override
-    public List<Cruise> IdentifyCurrentCruises(LocalDate date) {
+    public List<Cruise> identifyCurrentCruises(LocalDate date) {
         return null;
     }
 
     @Override
-    public Map<Cruise, LocalDate> DeterminePlannedCruises(LocalDate date) {
+    public Map<Cruise, LocalDate> determinePlannedCruises(LocalDate date) {
         return null;
     }
 }

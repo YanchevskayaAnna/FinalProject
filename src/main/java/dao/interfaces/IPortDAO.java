@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface IPortDAO extends IAbstractDAO<Port> {
 
-    List<Excursion> FindExcursions(int portID);
+    List<Excursion> findExcursions(int portID);
 
 }

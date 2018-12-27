@@ -9,11 +9,11 @@ import java.util.Map;
 
 public interface ICruiseDAO extends IAbstractDAO<Cruise> {
 
-    int CalculateCountPassengers(int cruiseID);
-    int CountNumberEmptySeats(int cruiseID);
-    Map<Excursion, Integer> FindExcursions(int cruiseID);
-    List<Excursion> FindCruiseExcursions(int cruiseID);
-    List<Cruise> IdentifyCurrentCruises(LocalDate date);
-    Map<Cruise, LocalDate> DeterminePlannedCruises(LocalDate date);
+    int calculateCountPassengers(int cruiseID);
+    int countNumberEmptySeats(int cruiseID);
+    Map<Excursion, Integer> findExcursions(int cruiseID);
+    List<Excursion> findCruiseExcursions(int cruiseID);
+    List<Cruise> identifyCurrentCruises(LocalDate date);
+    Map<Cruise, LocalDate> determinePlannedCruises(LocalDate date);
 
 }

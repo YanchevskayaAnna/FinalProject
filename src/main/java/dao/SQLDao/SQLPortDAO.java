@@ -112,7 +112,7 @@ public class SQLPortDAO extends SQLDao<Port, Integer> implements IPortDAO {
 
 
     @Override
-    public List<Excursion> FindExcursions(int portID) {
+    public List<Excursion> findExcursions(int portID) {
         String sqlQuery = "SELECT * FROM excursions WHERE id_port = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, portID);

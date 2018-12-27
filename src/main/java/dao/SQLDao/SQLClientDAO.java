@@ -100,27 +100,27 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
     }
 
     @Override
-    public List<Bonus> DefineBonuses(int idClient, int idCruise) {
+    public List<Bonus> defineBonuses(int idClient, int idCruise) {
         return null;
     }
 
     @Override
-    public Map<Excursion, Boolean> DefineExcursions(int idClient, int idCruise) {
+    public Map<Excursion, Boolean> defineExcursions(int idClient, int idCruise) {
         return null;
     }
 
     @Override
-    public List<Cruise> DefineCruises(int idClient) {
+    public List<Cruise> defineCruises(int idClient) {
         return null;
     }
 
     @Override
-    public ExcursionTicket PayExcursion(int idClient, int idExcursion) {
+    public ExcursionTicket payExcursion(int idClient, int idExcursion) {
         return null;
     }
 
     @Override
-    public Ticket PayCruise(int idClient, int idCruise, int idTicketClass) {
+    public Ticket payCruise(int idClient, int idCruise, int idTicketClass) {
         return null;
     }
 }
