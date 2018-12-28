@@ -1,0 +1,4 @@
+
+URL = jdbc:mysql://localhost:3306/TravelCompany?autoReconnect=true&useSSL=false&serverTimezone=UTC
+USER = root
+PASSWORD = root

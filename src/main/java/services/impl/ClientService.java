@@ -15,6 +15,11 @@ public class ClientService implements IClientService {
     }
 
     @Override
+    public List<Client> getAllClients() {
+        return clientDAO.getAll();
+    }
+
+    @Override
     public List<Bonus> defineBonuses(int idClient, int idCruise) {
         return clientDAO.defineBonuses(idClient, idCruise);
     }

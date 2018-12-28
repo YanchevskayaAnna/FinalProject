@@ -4,12 +4,19 @@ import dao.interfaces.IExcursionTicketDAO;
 import model.ExcursionTicket;
 import services.interfaces.IExcursionTicketService;
 
+import java.util.List;
+
 public class ExcursionTicketService implements IExcursionTicketService {
 
     private IExcursionTicketDAO excursionTicketDAO;
 
     public ExcursionTicketService(IExcursionTicketDAO excursionTicketDAO) {
         this.excursionTicketDAO = excursionTicketDAO;
+    }
+
+    @Override
+    public List<ExcursionTicket> getAllExcursionTickets() {
+        return excursionTicketDAO.getAll();
     }
 
     @Override

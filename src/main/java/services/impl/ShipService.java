@@ -4,11 +4,18 @@ import dao.interfaces.IShipDAO;
 import model.Ship;
 import services.interfaces.IShipService;
 
+import java.util.List;
+
 public class ShipService implements IShipService {
     private IShipDAO shipDAO;
 
     public ShipService(IShipDAO shipDAO) {
         this.shipDAO = shipDAO;
+    }
+
+    @Override
+    public List<Ship> getAllShips() {
+        return shipDAO.getAll();
     }
 
     @Override

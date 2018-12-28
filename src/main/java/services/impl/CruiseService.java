@@ -18,6 +18,11 @@ public class CruiseService implements ICruiseService {
     }
 
     @Override
+    public List<Cruise> getAllCruises() {
+        return cruiseDAO.getAll();
+    }
+
+    @Override
     public int calculateCountPassengers(int cruiseID) {
         return cruiseDAO.calculateCountPassengers(cruiseID);
     }

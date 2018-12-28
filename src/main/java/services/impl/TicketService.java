@@ -4,11 +4,18 @@ import dao.interfaces.ITicketDAO;
 import model.Ticket;
 import services.interfaces.ITicketService;
 
+import java.util.List;
+
 public class TicketService implements ITicketService {
     private ITicketDAO ticketDAO;
 
     public TicketService(ITicketDAO ticketDAO) {
         this.ticketDAO = ticketDAO;
+    }
+
+    @Override
+    public List<Ticket> getAllTickets() {
+        return ticketDAO.getAll();
     }
 
     @Override

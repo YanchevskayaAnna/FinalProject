@@ -15,6 +15,11 @@ public class PortService implements IPortService {
     }
 
     @Override
+    public List<Port> getAllPorts() {
+        return portDao.getAll();
+    }
+
+    @Override
     public List<Excursion> findExcursions(int portID) {
         return portDao.findExcursions(portID);
     }

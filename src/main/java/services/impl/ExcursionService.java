@@ -4,11 +4,18 @@ import dao.interfaces.IExcursionDAO;
 import model.Excursion;
 import services.interfaces.IExcursionService;
 
+import java.util.List;
+
 public class ExcursionService implements IExcursionService {
     private IExcursionDAO excursionDAO;
 
     public ExcursionService(IExcursionDAO excursionDAO) {
         this.excursionDAO = excursionDAO;
+    }
+
+    @Override
+    public List<Excursion> getAllExcursions() {
+        return excursionDAO.getAll();
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IClientService {
+    List<Client> getAllClients();
     List<Bonus> defineBonuses(int idClient, int idCruise);
     Map<Excursion, Boolean> defineExcursions(int idClient, int idCruise);
     List<Cruise> defineCruises(int idClient);

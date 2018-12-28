@@ -6,6 +6,7 @@ import model.Port;
 import java.util.List;
 
 public interface IPortService {
+    List<Port> getAllPorts();
     List<Excursion> findExcursions(int portID);
     Port getPortId(Integer id);
     boolean updatePort(Port port);
