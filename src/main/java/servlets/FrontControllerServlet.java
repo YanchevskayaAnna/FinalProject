@@ -19,6 +19,7 @@ public class FrontControllerServlet extends HttpServlet {
 
     private IClientService clientService;
     private ICruiseService cruiseService;
+    private ICruiseRouteService cruiseRouteService;
     private IExcursionService excursionService;
     private IExcursionTicketService excursionTicketService;
     private IPortService portService;
@@ -31,6 +32,7 @@ public class FrontControllerServlet extends HttpServlet {
         DaoFactory factory = DaoFactory.getInstance();
         clientService = new ClientService(factory.createClientDao());
         cruiseService = new CruiseService(factory.createCruiseDao());
+        cruiseRouteService = new CruiseRouteService(factory.createCruiseRouteDao());
         excursionService = new ExcursionService(factory.createExcursionDao());
         excursionTicketService = new ExcursionTicketService(factory.createExcursionTicketDao());
         portService = new PortService(factory.createPortDao());
@@ -48,7 +50,7 @@ public class FrontControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         FrontCommand command = getCommand(request);
-        command.init(getServletContext(), request, response, clientService, cruiseService, excursionService, excursionTicketService, portService, shipService, ticketClassService, ticketService);
+        command.init(getServletContext(), request, response, clientService, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketClassService, ticketService);
         command.process();
     }
 
@@ -56,7 +58,7 @@ public class FrontControllerServlet extends HttpServlet {
         try {
             Class type = Class.forName(String.format(
                     "servlets.commands.%sCommand",
-                    request.getParameter("command") == null ? "ShowTrains" :request.getParameter("command")));
+                    request.getParameter("command") == null ? "ShowTravelCompany" :request.getParameter("command")));
             return (FrontCommand) type
                     .asSubclass(FrontCommand.class)
                     .newInstance();

@@ -60,7 +60,7 @@
                     <version>2.2</version>
                     <configuration>
                         <port>8888</port>
-                        <path>/trains</path>
+                        <path>/travelcompany</path>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -75,6 +75,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
 
 </project>

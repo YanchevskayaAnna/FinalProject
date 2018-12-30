@@ -34,6 +34,7 @@ public class SQLExcursionTicketDAO extends SQLDao<ExcursionTicket, Integer> impl
             ExcursionTicket excursion = new ExcursionTicket();
             excursion.setId(resultSet.getInt("id"));
             excursion.setNumber(resultSet.getString("excursionticket_number"));
+            excursion.setIdExcursion(resultSet.getInt("excursionticket_idExcursion"));
             excursion.setIdClient(resultSet.getInt("excursionticket_idclient"));
             excursion.setIdCruise(resultSet.getInt("excursionticket_idcruise"));
             excursionList.add(excursion);
@@ -44,7 +45,7 @@ public class SQLExcursionTicketDAO extends SQLDao<ExcursionTicket, Integer> impl
     @Override
     public boolean update(ExcursionTicket entity) {
 
-        String sqlQuery = "UPDATE excursions_tickets SET excursionticket_number=?, excursionticket_idclient=?,  excursionticket_idcruise =? WHERE id=?";
+        String sqlQuery = "UPDATE excursions_tickets SET excursionticket_number=?, excursionticket_idclient=?,  excursionticket_idcruise =?, excursionticket_idExcursion =? WHERE id=?";
 
         try {
             if (getById(entity.getId()) == null) {
@@ -59,7 +60,8 @@ public class SQLExcursionTicketDAO extends SQLDao<ExcursionTicket, Integer> impl
             preparedStatement.setString(1, entity.getNumber());
             preparedStatement.setInt(2, entity.getIdClient());
             preparedStatement.setInt(3, entity.getIdCruise());
-
+            preparedStatement.setInt(4, entity.getIdExcursion());
+            preparedStatement.setInt(5, entity.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,12 +73,13 @@ public class SQLExcursionTicketDAO extends SQLDao<ExcursionTicket, Integer> impl
 
     @Override
     public boolean create(ExcursionTicket entity) {
-        String sqlQuery = "INSERT INTO excursions_tickets (excursionticket_number, excursionticket_idclient, excursionticket_idcruise) VALUES (?,?)";
+        String sqlQuery = "INSERT INTO excursions_tickets (excursionticket_number, excursionticket_idclient, excursionticket_idcruise, excursionticket_idExcursion) VALUES (?,?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setString(1, entity.getNumber());
             preparedStatement.setInt(2, entity.getIdClient());
             preparedStatement.setInt(3, entity.getIdCruise());
+            preparedStatement.setInt(4, entity.getIdExcursion());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

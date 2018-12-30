@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.interfaces.ICruiseRouteDAO;
 import services.interfaces.*;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ public abstract class FrontCommand {
     private HttpServletResponse response;
     private IClientService clientService;
     protected ICruiseService cruiseService;
+    protected ICruiseRouteService cruiseRouteService;
     private IExcursionService excursionService;
     private IExcursionTicketService excursionTicketService;
     private IPortService portService;
@@ -28,6 +30,7 @@ public abstract class FrontCommand {
             HttpServletResponse servletResponse,
             IClientService clientService,
             ICruiseService cruiseService,
+            ICruiseRouteService cruiseRouteService,
             IExcursionService excursionService,
             IExcursionTicketService excursionTicketService,
             IPortService portService,
@@ -40,6 +43,7 @@ public abstract class FrontCommand {
         this.response = servletResponse;
         this.clientService = clientService;
         this.cruiseService = cruiseService;
+        this.cruiseRouteService = cruiseRouteService;
         this.excursionService = excursionService;
         this.excursionTicketService = excursionTicketService;
         this.portService = portService;

@@ -1,6 +1,7 @@
 package dao.interfaces;
 
 import model.Cruise;
+import model.CruiseRoute;
 import model.Excursion;
 
 import java.time.LocalDate;
@@ -15,5 +16,6 @@ public interface ICruiseDAO extends IAbstractDAO<Cruise> {
     List<Excursion> findCruiseExcursions(int cruiseID);
     List<Cruise> identifyCurrentCruises(LocalDate date);
     Map<Cruise, LocalDate> determinePlannedCruises(LocalDate date);
+
 
 }

@@ -44,7 +44,7 @@ INSERT INTO cruises(cruise_name, cruise_number, cruise_idShip, cruise_dateStart,
 INSERT INTO cruises(cruise_name, cruise_number, cruise_idShip, cruise_dateStart, cruise_dateFinish, cruise_price, cruise_countdays) VALUES ('Norwegian fjords',  '33', 1, '2019-03-15', '2019-03-22', 900, 8);
 INSERT INTO cruises(cruise_name, cruise_number, cruise_idShip, cruise_dateStart, cruise_dateFinish, cruise_price, cruise_countdays) VALUES ('Western Europe',  '44', 2, '2019-02-15', '2019-02-22', 800,8);
 INSERT INTO cruises(cruise_name, cruise_number, cruise_idShip, cruise_dateStart, cruise_dateFinish, cruise_price, cruise_countdays) VALUES ('Liberty Island',  '55', 2, '2019-03-15', '2019-03-22', 1000,8);
-INSERT INTO cruises(cruise_name, cruise_number, cruise_idShip, cruise_dateStart, cruise_dateFinish, cruise_price, cruise_countdays) VALUES ('Cuba and the Caribbean',  '66', 3, '2019-01-15', '2019-01-22', 1500, 15);
+INSERT INTO cruises(cruise_name, cruise_number, cruise_idShip, cruise_dateStart, cruise_dateFinish, cruise_price, cruise_countdays) VALUES ('Cuba and the Caribbean',  '66', 3, '2019-01-15', '2019-01-29', 1500, 15);
 
 SELECT * FROM cruises;
 
@@ -85,6 +85,31 @@ INSERT INTO ports(port_name) VALUES ('Ocho Rios');
 INSERT INTO ports(port_name) VALUES ('Nassau');
 
 SELECT * FROM ports;
+
+CREATE TABLE cruise_routs(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cruiserout_idcruise int,
+    cruiserout_idport int,
+    cruiserout_dateStart date
+  );
+
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (3, 16, '2019-03-15');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (3, 17, '2019-03-17');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (3, 18, '2019-03-18');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (3, 19, '2019-03-19');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (3, 20, '2019-03-20');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (3, 16, '2019-03-22');
+
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 21, '2019-01-15');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 22, '2019-01-17');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 23, '2019-01-18');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 24, '2019-01-20');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 25, '2019-01-22');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 26, '2019-01-23');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 27, '2019-01-25');
+INSERT INTO cruise_routs(cruiserout_idcruise, cruiserout_idport, cruiserout_dateStart) VALUES (6, 21, '2019-01-29');
+
+SELECT * FROM cruise_routs;
 
 CREATE TABLE excursions(
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY ,

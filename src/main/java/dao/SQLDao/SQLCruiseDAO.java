@@ -2,6 +2,7 @@ package dao.SQLDao;
 
 import dao.interfaces.ICruiseDAO;
 import model.Cruise;
+import model.CruiseRoute;
 import model.Excursion;
 
 import java.sql.*;
@@ -39,9 +40,10 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
             cruise.setName(resultSet.getString("cruise_name"));
             cruise.setNumber(resultSet.getString("cruise_number"));
             cruise.setPrice(resultSet.getInt("cruise_price"));
+            cruise.setCountOfDays(resultSet.getInt("cruise_countdays"));
             cruise.setIdShip(resultSet.getInt("cruise_idShip"));
-//            cruise.setDateStart(resultSet.getDate("cruise_dateStart"));
-//            cruise.setDateFinish(resultSet.getDate("cruise_dateStart"));
+            cruise.setDateStart(resultSet.getDate("cruise_dateStart").toLocalDate());
+            cruise.setDateFinish(resultSet.getDate("cruise_dateFinish").toLocalDate());
             cruiseList.add(cruise);
         }
         return cruiseList;
@@ -134,4 +136,6 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
     public Map<Cruise, LocalDate> determinePlannedCruises(LocalDate date) {
         return null;
     }
+
+
 }

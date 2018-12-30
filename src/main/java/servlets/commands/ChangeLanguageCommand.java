@@ -10,6 +10,6 @@ public class ChangeLanguageCommand extends FrontCommand {
     public void process() throws ServletException, IOException {
         request.setAttribute("cruises", cruiseService.getAllCruises());
         request.getSession().setAttribute("lang", request.getParameter("lang"));
-        forward("cruises");
+        forward("travelcompany");
     }
 }

@@ -35,7 +35,8 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
             Client client = new Client();
             client.setId(resultSet.getInt("id"));
             client.setName(resultSet.getString("client_name"));
-            client.setIdentificationNumber(resultSet.getString("client_inn"));
+            client.setMail(resultSet.getString("client_mail"));
+            client.setPhone(resultSet.getString("client_phone"));
             clientList.add(client);
         }
         return clientList;
@@ -44,7 +45,7 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
     @Override
     public boolean update(Client entity) {
 
-        String sqlQuery = "UPDATE clients SET client_name=?, client_inn=? WHERE id=?";
+        String sqlQuery = "UPDATE clients SET client_name=?, client_mail=?, client_phone=?  WHERE id=?";
 
         try {
             if (getById(entity.getId()) == null) {
@@ -57,8 +58,9 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
 
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getIdentificationNumber());
-            preparedStatement.setInt(3, entity.getId());
+            preparedStatement.setString(2, entity.getMail());
+            preparedStatement.setString(3, entity.getPhone());
+            preparedStatement.setInt(4, entity.getId());
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -71,11 +73,12 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
 
     @Override
     public boolean create(Client entity) {
-        String sqlQuery = "INSERT INTO clients (client_name, client_inn) VALUES (?,?)";
+        String sqlQuery = "INSERT INTO clients (client_name, client_mail, client_phone) VALUES (?,?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getIdentificationNumber());
+            preparedStatement.setString(2, entity.getMail());
+            preparedStatement.setString(3, entity.getPhone());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

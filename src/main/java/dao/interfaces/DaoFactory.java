@@ -13,6 +13,7 @@ public abstract class DaoFactory {
     public abstract IShipDAO createShipDao();
     public abstract ITicketClassDAO createTicketClassDao();
     public abstract ITicketDAO createTicketDao();
+    public abstract ICruiseRouteDAO createCruiseRouteDao();
 
     public static DaoFactory getInstance(){
             if( daoFactory == null ){
