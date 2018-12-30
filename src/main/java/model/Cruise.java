@@ -22,6 +22,16 @@ public class Cruise extends _IDEntity{
     private LocalDate dateFinish;
     @Column(name = "cruise_price")
     private int price;
+    @Column(name = "cruise_countdays")
+    private int countOfDays;
+
+    public int getCountOfDays() {
+        return countOfDays;
+    }
+
+    public void setCountOfDays(int countOfDays) {
+        this.countOfDays = countOfDays;
+    }
 
     private List<Client> passengers;
 
@@ -105,6 +115,7 @@ public class Cruise extends _IDEntity{
                 "name='" + name + '\'' +
                 ", number='" + number + '\'' +
                 ", idShip=" + idShip +
+                ", count of days =" + countOfDays +
                 ", dateStart=" + dateStart +
                 ", dateFinish=" + dateFinish +
                 ", price=" + price +

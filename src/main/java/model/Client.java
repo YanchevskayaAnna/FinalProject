@@ -9,8 +9,10 @@ import java.util.Objects;
 public class Client extends _IDEntity{
     @Column(name = "client_name")
     private String name;
-    @Column(name = "client_inn")
-    private String identificationNumber;
+    @Column(name = "client_mail")
+    private String mail;
+    @Column(name = "client_phone")
+    private String phone;
 
     public Client() {
     }
@@ -23,12 +25,20 @@ public class Client extends _IDEntity{
         this.name = name;
     }
 
-    public String getIdentificationNumber() {
-        return identificationNumber;
+    public String getMail() {
+        return mail;
     }
 
-    public void setIdentificationNumber(String identificationNumber) {
-        this.identificationNumber = identificationNumber;
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
@@ -36,20 +46,23 @@ public class Client extends _IDEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(identificationNumber, client.identificationNumber);
+        return Objects.equals(name, client.name) &&
+                Objects.equals(mail, client.mail) &&
+                Objects.equals(phone, client.phone);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(identificationNumber);
+        return Objects.hash(name, mail, phone);
     }
 
     @Override
     public String toString() {
         return "Client{" +
                 "name='" + name + '\'' +
-                ", identificationNumber='" + identificationNumber + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

@@ -10,8 +10,19 @@ public class ExcursionTicket extends _IDEntity{
 
     @Column(name = "excursionticket_number")
     private String number;
+    @Column(name = "excursionticket_idExcursion")
+    private int idExcursion;
     @Column(name = "excursionticket_idclient")
     private int idClient;
+
+    public int getIdExcursion() {
+        return idExcursion;
+    }
+
+    public void setIdExcursion(int idExcursion) {
+        this.idExcursion = idExcursion;
+    }
+
     @Column(name = "excursionticket_idcruise")
     private int idCruise;
 
