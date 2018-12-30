@@ -11,4 +11,5 @@ public interface IExcursionService {
     boolean createExcursion(Excursion excursion);
     boolean deleteExcursion(Excursion excursion);
     boolean deleteExcursionById(Integer id);
+    List<Excursion> getPortExcursions(int idPort);
 }

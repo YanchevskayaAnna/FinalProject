@@ -12,7 +12,7 @@ public class CruiseRoute extends _IDEntity{
     private int idCruise;
     @Column(name = "cruiserout_idport")
     private int idPort;
-    @Column(name = "cruiserout_dateArrival")
+    @Column(name = "cruiserout_dateStart")
     private LocalDate dateArrival;
 
     public CruiseRoute() {

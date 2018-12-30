@@ -14,15 +14,15 @@ public abstract class FrontCommand {
     private ServletContext context;
     protected HttpServletRequest request;
     private HttpServletResponse response;
-    private IClientService clientService;
+    protected IClientService clientService;
     protected ICruiseService cruiseService;
     protected ICruiseRouteService cruiseRouteService;
-    private IExcursionService excursionService;
-    private IExcursionTicketService excursionTicketService;
-    private IPortService portService;
-    private IShipService shipService;
-    private ITicketClassService ticketClassService;
-    private ITicketService ticketService;
+    protected IExcursionService excursionService;
+    protected IExcursionTicketService excursionTicketService;
+    protected IPortService portService;
+    protected IShipService shipService;
+    protected ITicketClassService ticketClassService;
+    protected ITicketService ticketService;
 
     public void init(
             ServletContext servletContext,

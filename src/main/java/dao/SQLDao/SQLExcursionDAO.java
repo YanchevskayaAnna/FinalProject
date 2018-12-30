@@ -35,7 +35,7 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
             excursion.setId(resultSet.getInt("id"));
             excursion.setName(resultSet.getString("excursion_name"));
             excursion.setPrice(resultSet.getInt("excursion_price"));
-            excursion.setIdPort(resultSet.getInt("excursion_idPort"));
+            excursion.setIdPort(resultSet.getInt("excursion_id_port"));
             excursionList.add(excursion);
         }
         return excursionList;
@@ -99,5 +99,20 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
         }
 
         return true;
+    }
+
+    @Override
+    public List<Excursion> getPortExcursions(int idPort) {
+        String sqlQuery = "SELECT * FROM excursions WHERE excursion_id_port = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, idPort);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Excursion> excursionList = getAllExcursionsFromResultSet(resultSet);
+            return excursionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

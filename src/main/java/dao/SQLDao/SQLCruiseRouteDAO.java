@@ -22,7 +22,7 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
     public List<CruiseRoute> getAll() {
 
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM cruises;");) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM cruise_routs;");) {
             List<CruiseRoute> cruiseList = getAllCruisesFromResultSet(resultSet);
             return cruiseList;
         } catch (SQLException e) {
@@ -38,9 +38,9 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
         while (resultSet.next()) {
             CruiseRoute cruise = new CruiseRoute();
             cruise.setId(resultSet.getInt("id"));
-            cruise.setIdCruise(resultSet.getInt("cruiseroute_idcruise"));
-            cruise.setIdPort(resultSet.getInt("cruiseroute_idport"));
-            cruise.setDateArrival(resultSet.getDate("cruiseroute_dateArrival").toLocalDate());
+            cruise.setIdCruise(resultSet.getInt("cruiserout_idcruise"));
+            cruise.setIdPort(resultSet.getInt("cruiserout_idport"));
+            cruise.setDateArrival(resultSet.getDate("cruiserout_dateStart").toLocalDate());
             cruiseList.add(cruise);
         }
         return cruiseList;
@@ -49,7 +49,7 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
     @Override
     public boolean update(CruiseRoute entity) {
 
-        String sqlQuery = "UPDATE cruiseroutes SET cruiseroute_idCruise=?, cruiseroute_idPort=? WHERE id=?";
+        String sqlQuery = "UPDATE cruise_routs SET cruiseroute_idCruise=?, cruiseroute_idPort=? WHERE id=?";
 
         try {
             if (getById(entity.getId()) == null) {
@@ -76,7 +76,7 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
 
     @Override
     public boolean create(CruiseRoute entity) {
-        String sqlQuery = "INSERT INTO cruiseroutes (cruiseroute_idCruise, cruiseroute_idPort) VALUES (?,?)";
+        String sqlQuery = "INSERT INTO cruise_routs (cruiseroute_idCruise, cruiseroute_idPort) VALUES (?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, entity.getIdCruise());
@@ -91,7 +91,7 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
 
     @Override
     public boolean delete(CruiseRoute entity) {
-        String sqlQuery = "DELETE FROM cruiseroutes WHERE id = ?";
+        String sqlQuery = "DELETE FROM cruise_routs WHERE id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, entity.getId());

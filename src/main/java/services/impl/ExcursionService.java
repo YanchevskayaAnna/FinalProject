@@ -42,4 +42,9 @@ public class ExcursionService implements IExcursionService {
     public boolean deleteExcursionById(Integer id) {
         return excursionDAO.deleteById(id);
     }
+
+    @Override
+    public List<Excursion> getPortExcursions(int idPort) {
+        return excursionDAO.getPortExcursions(idPort);
+    }
 }
