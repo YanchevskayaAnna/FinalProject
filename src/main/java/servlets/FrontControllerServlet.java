@@ -26,6 +26,7 @@ public class FrontControllerServlet extends HttpServlet {
     private IShipService shipService;
     private ITicketService ticketService;
     private IBonusService bonusService;
+    private ITicketBonusesService ticketBonusesService;
 
     @Override
     public void init() throws ServletException {
@@ -39,6 +40,7 @@ public class FrontControllerServlet extends HttpServlet {
         shipService = new ShipService(factory.createShipDao());
         ticketService = new TicketService(factory.createTicketDao());
         bonusService = new BonusService(factory.createBonusDao());
+        ticketBonusesService = new TicketBonusesService(factory.createTicketBonusesDao());
     }
 
     @Override
@@ -50,7 +52,7 @@ public class FrontControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         FrontCommand command = getCommand(request);
-        command.init(getServletContext(), request, response, clientService, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketService, bonusService);
+        command.init(getServletContext(), request, response, clientService, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketService, bonusService, ticketBonusesService);
         command.process();
     }
 

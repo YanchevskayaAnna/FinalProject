@@ -78,4 +78,9 @@ public class SQLDaoFactory extends DaoFactory {
     public IBonusDAO createBonusDao() {
         return new SQLBonusDAO(getConnection());
     }
+
+    @Override
+    public ITicketBonusesDAO createTicketBonusesDao() {
+        return new SQLTicketBonusesDAO(getConnection());
+    }
 }

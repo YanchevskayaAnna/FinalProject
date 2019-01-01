@@ -1,6 +1,7 @@
 package dao.SQLDao;
 
 import dao.interfaces.ITicketDAO;
+import model.Bonus;
 import model.Ticket;
 
 import java.sql.*;
@@ -36,7 +37,7 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
             ticket.setNumber(resultSet.getInt("ticket_number"));
             ticket.setIdClient(resultSet.getInt("ticket_idclient"));
             ticket.setIdCruise(resultSet.getInt("ticket_idcruise"));
-            ticket.setIdTicketComfortLevel(resultSet.getInt("ticket_comfortlevel"));
+            ticket.setPrice(resultSet.getInt("ticket_price"));
             ticketList.add(ticket);
         }
         return ticketList;
@@ -45,7 +46,7 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
     @Override
     public boolean update(Ticket entity) {
 
-        String sqlQuery = "UPDATE tickets SET ticket_number=?, ticket_comfortlevel=?,ticket_idclient=?, ticket_idcruise=? WHERE id=?";
+        String sqlQuery = "UPDATE tickets SET ticket_number=?, ticket_price=?,ticket_idclient=?, ticket_idcruise=? WHERE id=?";
 
         try {
             if (getById(entity.getId()) == null) {
@@ -58,7 +59,7 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
 
             preparedStatement.setInt(1, entity.getNumber());
-            preparedStatement.setInt(2, entity.getIdTicketComfortLevel());
+            preparedStatement.setInt(2, entity.getPrice());
             preparedStatement.setInt(3, entity.getIdClient());
             preparedStatement.setInt(4, entity.getIdCruise());
             preparedStatement.setInt(5, entity.getId());
@@ -74,11 +75,11 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
 
     @Override
     public boolean create(Ticket entity) {
-        String sqlQuery = "INSERT INTO tickets (ticket_number, ticket_comfortlevel, ticket_idclient, ticket_idcruise) VALUES (?,?,?,?)";
+        String sqlQuery = "INSERT INTO tickets (ticket_number, ticket_price, ticket_idclient, ticket_idcruise) VALUES (?,?,?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, entity.getNumber());
-            preparedStatement.setInt(2, entity.getIdTicketComfortLevel());
+            preparedStatement.setInt(2, entity.getPrice());
             preparedStatement.setInt(3, entity.getIdClient());
             preparedStatement.setInt(4, entity.getIdCruise());
             preparedStatement.execute();
@@ -105,4 +106,8 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
     }
 
 
+    @Override
+    public int definePrice(int idCruise, List<Bonus> bonusList) {
+        return 0;
+    }
 }

@@ -23,6 +23,7 @@ public abstract class FrontCommand {
     protected IShipService shipService;
     protected ITicketService ticketService;
     protected IBonusService bonusService;
+    protected ITicketBonusesService ticketBonusesService;
 
     public void init(
             ServletContext servletContext,
@@ -36,7 +37,8 @@ public abstract class FrontCommand {
             IPortService portService,
             IShipService shipService,
             ITicketService ticketService,
-            IBonusService bonusService) {
+            IBonusService bonusService,
+            ITicketBonusesService ticketBonusesService) {
 
         this.context = servletContext;
         this.request = servletRequest;
@@ -50,6 +52,7 @@ public abstract class FrontCommand {
         this.shipService = shipService;
         this.ticketService = ticketService;
         this.bonusService = bonusService;
+        this.ticketBonusesService = ticketBonusesService;
 
       }
 

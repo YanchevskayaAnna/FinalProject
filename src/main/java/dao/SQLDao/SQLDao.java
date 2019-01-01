@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLDao<T, K> {
+public class SQLDao<T,K> {
 
         private Class<T> entityClass;
         private Class<K> keyClass;

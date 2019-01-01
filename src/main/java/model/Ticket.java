@@ -11,14 +11,14 @@ public class Ticket extends _IDEntity{
     @Column(name = "ticket_number")
     private int number;
 
-    @Column(name = "ticket_comfortlevel")
-    private int idTicketComfortLevel;
-
     @Column(name = "ticket_idclient")
     private int idClient;
 
     @Column(name = "ticket_idcruise")
     private int idCruise;
+
+    @Column(name = "ticket_price")
+    private int price;
 
     public Ticket() {
     }
@@ -29,14 +29,6 @@ public class Ticket extends _IDEntity{
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public int getIdTicketComfortLevel() {
-        return idTicketComfortLevel;
-    }
-
-    public void setIdTicketComfortLevel(int idTicketComfortLevel) {
-        this.idTicketComfortLevel = idTicketComfortLevel;
     }
 
     public int getIdClient() {
@@ -54,13 +46,20 @@ public class Ticket extends _IDEntity{
     public void setIdCruise(int idCruise) {
         this.idCruise = idCruise;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
         return number == ticket.number &&
-                idTicketComfortLevel == ticket.idTicketComfortLevel &&
                 idClient == ticket.idClient &&
                 idCruise == ticket.idCruise;
     }
@@ -68,18 +67,19 @@ public class Ticket extends _IDEntity{
     @Override
     public int hashCode() {
 
-        return Objects.hash(number, idTicketComfortLevel, idClient, idCruise);
+        return Objects.hash(number, idClient, idCruise);
     }
-
 
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "number=" + number +
-                ", idTicketComfortLevel=" + idTicketComfortLevel +
+                ", price=" + price +
                 ", idClient=" + idClient +
                 ", idCruise=" + idCruise +
                 '}';
     }
+
+
 }
