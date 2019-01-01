@@ -33,22 +33,12 @@ public class CruiseService implements ICruiseService {
     }
 
     @Override
-    public Map<Excursion, Integer> findExcursions(int cruiseID) {
-        return cruiseDAO.findExcursions(cruiseID);
-    }
-
-    @Override
-    public List<Excursion> findCruiseExcursions(int cruiseID) {
-        return cruiseDAO.findCruiseExcursions(cruiseID);
-    }
-
-    @Override
     public List<Cruise> identifyCurrentCruises(LocalDate date) {
         return cruiseDAO.identifyCurrentCruises(date);
     }
 
     @Override
-    public Map<Cruise, LocalDate> determinePlannedCruises(LocalDate date) {
+    public List<Cruise> determinePlannedCruises(LocalDate date) {
         return cruiseDAO.determinePlannedCruises(date);
     }
 

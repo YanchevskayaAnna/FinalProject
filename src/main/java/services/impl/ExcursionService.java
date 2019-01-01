@@ -47,4 +47,9 @@ public class ExcursionService implements IExcursionService {
     public List<Excursion> getPortExcursions(int idPort) {
         return excursionDAO.getPortExcursions(idPort);
     }
+
+    @Override
+    public List<Excursion> findCruiseExcursions(int cruiseID) {
+        return excursionDAO.findCruiseExcursions(cruiseID);
+    }
 }

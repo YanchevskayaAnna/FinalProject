@@ -109,31 +109,58 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
 
     @Override
     public int calculateCountPassengers(int cruiseID) {
+
+        String sqlQuery = "SELECT COUNT(id) id FROM tickets WHERE ticket_idcruise = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, cruiseID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public int countNumberEmptySeats(int cruiseID) {
+        String sqlQuery = "SELECT (MAX(ships.ship_passengercapacity) - COUNT(tickets.id)) countEmptySeats FROM tickets LEFT JOIN cruises LEFT JOIN ships ON cruises.cruise_idShip = ships.id ON tickets.ticket_idcruise = cruises.id WHERE ticket_idcruise = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, cruiseID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("countEmptySeats");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
     @Override
-    public Map<Excursion, Integer> findExcursions(int cruiseID) {
-        return null;
-    }
-
-    @Override
-    public List<Excursion> findCruiseExcursions(int cruiseID) {
-        return null;
-    }
-
-    @Override
     public List<Cruise> identifyCurrentCruises(LocalDate date) {
+        String sqlQuery = "SELECT * FROM cruises WHERE cruise_dateStart < ? AND cruise_dateFinish > ?"; // to do WHERE ? BETWEEN cruise_dateStart AND cruise_dateFinish"
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(2, java.sql.Date.valueOf(date));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Cruise> cruiseList = getAllCruisesFromResultSet(resultSet);
+            return cruiseList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public Map<Cruise, LocalDate> determinePlannedCruises(LocalDate date) {
+    public List<Cruise> determinePlannedCruises(LocalDate date) {
+        String sqlQuery = "SELECT * FROM cruises WHERE cruise_dateStart > ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Cruise> cruiseList = getAllCruisesFromResultSet(resultSet);
+            return cruiseList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

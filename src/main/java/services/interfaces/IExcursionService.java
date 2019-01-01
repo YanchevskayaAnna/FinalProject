@@ -3,6 +3,7 @@ package services.interfaces;
 import model.Excursion;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IExcursionService {
     List<Excursion> getAllExcursions();
@@ -12,4 +13,5 @@ public interface IExcursionService {
     boolean deleteExcursion(Excursion excursion);
     boolean deleteExcursionById(Integer id);
     List<Excursion> getPortExcursions(int idPort);
+    List<Excursion> findCruiseExcursions(int cruiseID);
 }

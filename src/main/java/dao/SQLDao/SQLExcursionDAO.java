@@ -115,4 +115,18 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
 
         return null;
     }
+
+    @Override
+    public List<Excursion> findCruiseExcursions(int cruiseID) {
+        String sqlQuery = "SELECT * FROM excursions INNER JOIN cruise_routs ON excursions.excursion_id_port = cruise_routs.cruiserout_idport AND cruise_routs.cruiserout_idcruise = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, cruiseID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Excursion> excursionList = getAllExcursionsFromResultSet(resultSet);
+            return excursionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
