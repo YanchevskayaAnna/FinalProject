@@ -14,6 +14,7 @@ public abstract class DaoFactory {
     public abstract ITicketClassDAO createTicketClassDao();
     public abstract ITicketDAO createTicketDao();
     public abstract ICruiseRouteDAO createCruiseRouteDao();
+    public abstract IBonusDAO createBonusDao();
 
     public static DaoFactory getInstance(){
             if( daoFactory == null ){

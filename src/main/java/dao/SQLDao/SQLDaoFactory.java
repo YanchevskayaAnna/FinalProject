@@ -79,4 +79,9 @@ public class SQLDaoFactory extends DaoFactory {
     public ICruiseRouteDAO createCruiseRouteDao() {
         return new SQLCruiseRouteDAO(getConnection());
     }
+
+    @Override
+    public IBonusDAO createBonusDao() {
+        return new SQLBonusDAO(getConnection());
+    }
 }

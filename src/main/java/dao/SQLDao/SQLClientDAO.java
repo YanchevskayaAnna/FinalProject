@@ -5,6 +5,7 @@ import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,17 +104,29 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
     }
 
     @Override
-    public List<Bonus> defineBonuses(int idClient, int idCruise) {
-        return null;
-    }
-
-    @Override
     public Map<Excursion, Boolean> defineExcursions(int idClient, int idCruise) {
-        return null;
-    }
+        String sqlQuery = "SELECT excursions.*, excursions_tickets.id idTicket FROM excursions INNER JOIN cruise_routs ON excursions.excursion_id_port = cruise_routs.cruiserout_idport AND cruise_routs.cruiserout_idcruise = ?" +
+                "LEFT JOIN excursions_tickets ON excursions.id = excursions_tickets.excursionticket_idExcursion AND excursions_tickets.excursionticket_idclient = ?";
 
-    @Override
-    public List<Cruise> defineCruises(int idClient) {
+        Map<Excursion, Boolean> excursionMap = new HashMap<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, idCruise);
+            preparedStatement.setInt(2, idClient);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Excursion excursion = new Excursion();
+                excursion.setId(resultSet.getInt("id"));
+                excursion.setName(resultSet.getString("excursion_name"));
+                excursion.setPrice(resultSet.getInt("excursion_price"));
+                excursion.setIdPort(resultSet.getInt("excursion_id_port"));
+                Integer excursionPaid = resultSet.getInt("idTicket");
+                excursionMap.put(excursion, excursionPaid != null);
+            }
+            return excursionMap;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

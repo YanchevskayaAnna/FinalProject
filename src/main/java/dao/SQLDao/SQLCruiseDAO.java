@@ -164,5 +164,20 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
         return null;
     }
 
+    @Override
+    public List<Cruise> defineCruises(int idClient) {
+        String sqlQuery = "SELECT * FROM cruises INNER JOIN tickets ON cruises.id = tickets.ticket_idcruise AND tickets.ticket_idclient = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, idClient);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Cruise> cruiseList = getAllCruisesFromResultSet(resultSet);
+            return cruiseList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
 }

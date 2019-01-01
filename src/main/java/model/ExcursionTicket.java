@@ -14,6 +14,8 @@ public class ExcursionTicket extends _IDEntity{
     private int idExcursion;
     @Column(name = "excursionticket_idclient")
     private int idClient;
+    @Column(name = "excursionticket_idcruise")
+    private int idCruise;
 
     public int getIdExcursion() {
         return idExcursion;
@@ -23,8 +25,6 @@ public class ExcursionTicket extends _IDEntity{
         this.idExcursion = idExcursion;
     }
 
-    @Column(name = "excursionticket_idcruise")
-    private int idCruise;
 
     public ExcursionTicket() {
     }

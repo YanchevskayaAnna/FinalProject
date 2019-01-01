@@ -21,17 +21,12 @@ public class ClientService implements IClientService {
 
     @Override
     public List<Bonus> defineBonuses(int idClient, int idCruise) {
-        return clientDAO.defineBonuses(idClient, idCruise);
+        return null;
     }
 
     @Override
     public Map<Excursion, Boolean> defineExcursions(int idClient, int idCruise) {
         return clientDAO.defineExcursions(idClient, idCruise);
-    }
-
-    @Override
-    public List<Cruise> defineCruises(int idClient) {
-        return clientDAO.defineCruises(idClient);
     }
 
     @Override

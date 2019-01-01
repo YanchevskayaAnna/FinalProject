@@ -33,6 +33,11 @@ public class CruiseService implements ICruiseService {
     }
 
     @Override
+    public List<Cruise> defineCruises(int idClient) {
+        return cruiseDAO.defineCruises(idClient);
+    }
+
+    @Override
     public List<Cruise> identifyCurrentCruises(LocalDate date) {
         return cruiseDAO.identifyCurrentCruises(date);
     }

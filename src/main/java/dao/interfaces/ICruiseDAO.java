@@ -14,5 +14,6 @@ public interface ICruiseDAO extends IAbstractDAO<Cruise> {
     int countNumberEmptySeats(int cruiseID);
     List<Cruise> identifyCurrentCruises(LocalDate date);
     List<Cruise> determinePlannedCruises(LocalDate date);
+    List<Cruise> defineCruises(int idClient);
 
 }
