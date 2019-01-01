@@ -24,7 +24,6 @@ public class FrontControllerServlet extends HttpServlet {
     private IExcursionTicketService excursionTicketService;
     private IPortService portService;
     private IShipService shipService;
-    private ITicketClassService ticketClassService;
     private ITicketService ticketService;
     private IBonusService bonusService;
 
@@ -38,7 +37,6 @@ public class FrontControllerServlet extends HttpServlet {
         excursionTicketService = new ExcursionTicketService(factory.createExcursionTicketDao());
         portService = new PortService(factory.createPortDao());
         shipService = new ShipService(factory.createShipDao());
-        ticketClassService = new TicketClassService(factory.createTicketClassDao());
         ticketService = new TicketService(factory.createTicketDao());
         bonusService = new BonusService(factory.createBonusDao());
     }
@@ -52,7 +50,7 @@ public class FrontControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         FrontCommand command = getCommand(request);
-        command.init(getServletContext(), request, response, clientService, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketClassService, ticketService, bonusService);
+        command.init(getServletContext(), request, response, clientService, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketService, bonusService);
         command.process();
     }
 

@@ -15,7 +15,6 @@ public class SQLDaoFactory extends DaoFactory {
 
     private static final String PROPERTIES_PATH = "src/main/resources/properties";
 
-
     private Connection getConnection(){
         try {
             Properties properties = new Properties();
@@ -63,11 +62,6 @@ public class SQLDaoFactory extends DaoFactory {
     @Override
     public IShipDAO createShipDao() {
         return new SQLShipDAO(getConnection());
-    }
-
-    @Override
-    public ITicketClassDAO createTicketClassDao() {
-        return new SQLTicketClassDAO(getConnection());
     }
 
     @Override

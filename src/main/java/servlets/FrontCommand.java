@@ -21,7 +21,6 @@ public abstract class FrontCommand {
     protected IExcursionTicketService excursionTicketService;
     protected IPortService portService;
     protected IShipService shipService;
-    protected ITicketClassService ticketClassService;
     protected ITicketService ticketService;
     protected IBonusService bonusService;
 
@@ -36,7 +35,6 @@ public abstract class FrontCommand {
             IExcursionTicketService excursionTicketService,
             IPortService portService,
             IShipService shipService,
-            ITicketClassService ticketClassService,
             ITicketService ticketService,
             IBonusService bonusService) {
 
@@ -50,7 +48,6 @@ public abstract class FrontCommand {
         this.excursionTicketService = excursionTicketService;
         this.portService = portService;
         this.shipService = shipService;
-        this.ticketClassService = ticketClassService;
         this.ticketService = ticketService;
         this.bonusService = bonusService;
 

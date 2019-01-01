@@ -11,7 +11,6 @@ public abstract class DaoFactory {
     public abstract IExcursionTicketDAO createExcursionTicketDao();
     public abstract IPortDAO createPortDao();
     public abstract IShipDAO createShipDao();
-    public abstract ITicketClassDAO createTicketClassDao();
     public abstract ITicketDAO createTicketDao();
     public abstract ICruiseRouteDAO createCruiseRouteDao();
     public abstract IBonusDAO createBonusDao();
