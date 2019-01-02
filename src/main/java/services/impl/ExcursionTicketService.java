@@ -43,4 +43,10 @@ public class ExcursionTicketService implements IExcursionTicketService {
     public boolean deleteExcursionTicketById(Integer id) {
         return excursionTicketDAO.deleteById(id);
     }
+
+    @Override
+    public ExcursionTicket payExcursion(int idClient, int idExcursion, int idCruise) {
+        ExcursionTicket ticket = new ExcursionTicket(idExcursion, idClient, idCruise);
+        return (excursionTicketDAO.create(ticket)? ticket: null);
+    }
 }

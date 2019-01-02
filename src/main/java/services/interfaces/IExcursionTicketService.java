@@ -10,4 +10,5 @@ public interface IExcursionTicketService {
     boolean createExcursionTicket(ExcursionTicket excursionTicket);
     boolean deleteExcursionTicket(ExcursionTicket excursionTicket);
     boolean deleteExcursionTicketById(Integer id);
+    ExcursionTicket payExcursion(int idClient, int idExcursion, int idCruise);
 }

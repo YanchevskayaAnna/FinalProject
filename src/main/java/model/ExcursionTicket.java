@@ -8,8 +8,6 @@ import java.util.Objects;
 @Table(name="excursions_tickets")
 public class ExcursionTicket extends _IDEntity{
 
-    @Column(name = "excursionticket_number")
-    private String number;
     @Column(name = "excursionticket_idExcursion")
     private int idExcursion;
     @Column(name = "excursionticket_idclient")
@@ -25,16 +23,13 @@ public class ExcursionTicket extends _IDEntity{
         this.idExcursion = idExcursion;
     }
 
+    public ExcursionTicket(int idExcursion, int idClient, int idCruise) {
+        this.idExcursion = idExcursion;
+        this.idClient = idClient;
+        this.idCruise = idCruise;
+    }
 
     public ExcursionTicket() {
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public int getIdClient() {
@@ -44,6 +39,7 @@ public class ExcursionTicket extends _IDEntity{
     public void setIdClient(int idClient) {
         this.idClient = idClient;
     }
+
 
     public int getIdCruise() {
         return idCruise;
@@ -58,23 +54,14 @@ public class ExcursionTicket extends _IDEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ExcursionTicket that = (ExcursionTicket) o;
-        return idClient == that.idClient &&
-                idCruise == that.idCruise &&
-                Objects.equals(number, that.number);
+        return idExcursion == that.idExcursion &&
+                idClient == that.idClient &&
+                idCruise == that.idCruise;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(number, idClient, idCruise);
-    }
-
-    @Override
-    public String toString() {
-        return "ExcursionTicket{" +
-                "number='" + number + '\'' +
-                ", idClient=" + idClient +
-                ", idCruise=" + idCruise +
-                '}';
+        return Objects.hash(idExcursion, idClient, idCruise);
     }
 }

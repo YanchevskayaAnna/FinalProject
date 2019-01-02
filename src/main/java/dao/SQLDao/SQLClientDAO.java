@@ -130,13 +130,4 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
         return null;
     }
 
-    @Override
-    public ExcursionTicket payExcursion(int idClient, int idExcursion) {
-        return null;
-    }
-
-    @Override
-    public Ticket payCruise(int idClient, int idCruise, int idTicketClass) {
-        return null;
-    }
 }

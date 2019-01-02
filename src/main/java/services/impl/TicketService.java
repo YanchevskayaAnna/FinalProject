@@ -1,6 +1,7 @@
 package services.impl;
 
 import dao.interfaces.ITicketDAO;
+import model.Bonus;
 import model.Ticket;
 import services.interfaces.ITicketService;
 
@@ -41,5 +42,16 @@ public class TicketService implements ITicketService {
     @Override
     public boolean deleteTicketById(Integer id) {
         return ticketDAO.deleteById(id);
+    }
+
+    @Override
+    public Ticket payCruise(int idClient, int idCruise, int price) {
+        Ticket ticket = new Ticket(idClient,idCruise, price);
+        return (ticketDAO.create(ticket)? ticket: null);
+    }
+
+    @Override
+    public int definePrice(int idCruise, List<Bonus> bonusList) {
+        return ticketDAO.definePrice(idCruise, bonusList);
     }
 }

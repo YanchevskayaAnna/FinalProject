@@ -8,9 +8,6 @@ import java.util.Objects;
 @Table(name="tickets")
 public class Ticket extends _IDEntity{
 
-    @Column(name = "ticket_number")
-    private int number;
-
     @Column(name = "ticket_idclient")
     private int idClient;
 
@@ -23,12 +20,10 @@ public class Ticket extends _IDEntity{
     public Ticket() {
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public Ticket(int idClient, int idCruise, int price) {
+        this.idClient = idClient;
+        this.idCruise = idCruise;
+        this.price = price;
     }
 
     public int getIdClient() {
@@ -59,7 +54,7 @@ public class Ticket extends _IDEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return number == ticket.number &&
+        return id == ticket.id &&
                 idClient == ticket.idClient &&
                 idCruise == ticket.idCruise;
     }
@@ -67,14 +62,14 @@ public class Ticket extends _IDEntity{
     @Override
     public int hashCode() {
 
-        return Objects.hash(number, idClient, idCruise);
+        return Objects.hash(id, idClient, idCruise);
     }
 
 
     @Override
     public String toString() {
         return "Ticket{" +
-                "number=" + number +
+                "number=" + id +
                 ", price=" + price +
                 ", idClient=" + idClient +
                 ", idCruise=" + idCruise +

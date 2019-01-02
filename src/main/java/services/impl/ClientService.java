@@ -30,16 +30,6 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public ExcursionTicket payExcursion(int idClient, int idExcursion) {
-        return clientDAO.payExcursion(idClient, idExcursion);
-    }
-
-    @Override
-    public Ticket payCruise(int idClient, int idCruise, int idTicketClass) {
-        return clientDAO.payCruise(idClient, idCruise, idTicketClass);
-    }
-
-    @Override
     public Client getClientId(Integer id) {
         return clientDAO.getById(id);
     }

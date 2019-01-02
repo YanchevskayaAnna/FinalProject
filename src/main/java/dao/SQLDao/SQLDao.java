@@ -10,7 +10,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class SQLDao<T,K> {
 
@@ -80,7 +82,8 @@ public class SQLDao<T,K> {
             Table table = entityClass.getAnnotation(Table.class);
             from = " from " + (table == null ? entityClass.getName() + "s": table.name());
 
-            Field[] fields = entityClass.getDeclaredFields();
+            Field[] fields = Stream.concat(Arrays.stream(entityClass.getDeclaredFields()), Arrays.stream(entityClass.getSuperclass().getDeclaredFields()))
+                            .toArray(Field[]::new);
             List<TableColumn> columnList = new ArrayList<>();
 
             for (Field field : fields) {
@@ -119,8 +122,6 @@ public class SQLDao<T,K> {
 
                 if (resultSet.next()) {
                     arrangeDatabaseTypes(columnList, resultSet.getMetaData());
-
-
                     entity = entityClass.getConstructor().newInstance();
                     for (TableColumn tableColumn : columnList) {
                         Object columnValue = getValue(resultSet, tableColumn.columnName, tableColumn.dbColumnType);
@@ -128,6 +129,7 @@ public class SQLDao<T,K> {
                                 Character.toUpperCase(tableColumn.getFieldName().charAt(0))
                                 + tableColumn.getFieldName().substring(1);
                         Method setMethod = entityClass.getDeclaredMethod(methodName, tableColumn.columnType);
+                        if (setMethod == null) {setMethod = entityClass.getSuperclass().getDeclaredMethod(methodName, tableColumn.columnType);};
                         setMethod.invoke(entity, columnValue);
                     }
                 }

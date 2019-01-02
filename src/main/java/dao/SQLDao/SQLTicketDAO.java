@@ -2,11 +2,13 @@ package dao.SQLDao;
 
 import dao.interfaces.ITicketDAO;
 import model.Bonus;
+import model.Excursion;
 import model.Ticket;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO {
 
@@ -34,7 +36,6 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
         while (resultSet.next()) {
             Ticket ticket = new Ticket();
             ticket.setId(resultSet.getInt("id"));
-            ticket.setNumber(resultSet.getInt("ticket_number"));
             ticket.setIdClient(resultSet.getInt("ticket_idclient"));
             ticket.setIdCruise(resultSet.getInt("ticket_idcruise"));
             ticket.setPrice(resultSet.getInt("ticket_price"));
@@ -46,7 +47,7 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
     @Override
     public boolean update(Ticket entity) {
 
-        String sqlQuery = "UPDATE tickets SET ticket_number=?, ticket_price=?,ticket_idclient=?, ticket_idcruise=? WHERE id=?";
+        String sqlQuery = "UPDATE tickets SET ticket_price=?,ticket_idclient=?, ticket_idcruise=? WHERE id=?";
 
         try {
             if (getById(entity.getId()) == null) {
@@ -58,11 +59,10 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
 
-            preparedStatement.setInt(1, entity.getNumber());
-            preparedStatement.setInt(2, entity.getPrice());
-            preparedStatement.setInt(3, entity.getIdClient());
-            preparedStatement.setInt(4, entity.getIdCruise());
-            preparedStatement.setInt(5, entity.getId());
+            preparedStatement.setInt(1, entity.getPrice());
+            preparedStatement.setInt(2, entity.getIdClient());
+            preparedStatement.setInt(3, entity.getIdCruise());
+            preparedStatement.setInt(4, entity.getId());
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -75,13 +75,12 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
 
     @Override
     public boolean create(Ticket entity) {
-        String sqlQuery = "INSERT INTO tickets (ticket_number, ticket_price, ticket_idclient, ticket_idcruise) VALUES (?,?,?,?)";
+        String sqlQuery = "INSERT INTO tickets (ticket_price, ticket_idclient, ticket_idcruise) VALUES (?,?,?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
-            preparedStatement.setInt(1, entity.getNumber());
-            preparedStatement.setInt(2, entity.getPrice());
-            preparedStatement.setInt(3, entity.getIdClient());
-            preparedStatement.setInt(4, entity.getIdCruise());
+            preparedStatement.setInt(1, entity.getPrice());
+            preparedStatement.setInt(2, entity.getIdClient());
+            preparedStatement.setInt(3, entity.getIdCruise());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,13 +100,21 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
             e.printStackTrace();
             return false;
         }
-
         return true;
     }
 
 
     @Override
     public int definePrice(int idCruise, List<Bonus> bonusList) {
+        String bonusID = bonusList.stream().map(bonus ->bonus.getId().toString()).collect(Collectors.joining(", "));
+        String sqlQuery = "SELECT (MAX(cruises.cruise_price) + SUM(bonuses.price)) price FROM cruises LEFT JOIN  bonuses ON bonuses.id IN (" +  bonusID + ")' WHERE cruises.id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, idCruise);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("price");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 }
