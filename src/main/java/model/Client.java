@@ -17,6 +17,12 @@ public class Client extends _IDEntity{
     public Client() {
     }
 
+    public Client(String name, String mail, String phone) {
+        this.name = name;
+        this.mail = mail;
+        this.phone = phone;
+    }
+
     public String getName() {
         return name;
     }
