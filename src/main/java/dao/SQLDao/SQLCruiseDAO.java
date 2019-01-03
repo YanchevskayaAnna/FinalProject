@@ -114,7 +114,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, cruiseID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.getInt("id");
+            return resultSet.next() ? resultSet.getInt("id") : 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,7 +127,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, cruiseID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.getInt("countEmptySeats");
+            return resultSet.next() ? resultSet.getInt("countEmptySeats") : 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }

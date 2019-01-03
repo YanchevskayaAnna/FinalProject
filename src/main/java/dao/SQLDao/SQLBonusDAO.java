@@ -104,6 +104,22 @@ public class SQLBonusDAO extends SQLDao<Bonus, Integer> implements IBonusDAO {
 
     @Override
     public List<Bonus> defineBonuses(int idClient, int idCruise) {
+        String sqlQuery =
+                "SELECT * FROM bonuses INNER JOIN ticketbonuses " +
+                                        "ON bonuses.id = ticketbonuses.ticketbonuses_idBonus " +
+                                                    "INNER JOIN tickets ON ticketbonuses.ticketbonuses_idTicket = tickets.id  AND tickets.ticket_idclient = ? AND tickets.ticket_idcruise = ? ";
+
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, idClient);
+            preparedStatement.setInt(2, idCruise);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Bonus> bonusList = getAllBonusesFromResultSet(resultSet);
+            return bonusList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

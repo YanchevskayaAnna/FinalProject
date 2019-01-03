@@ -1,12 +1,9 @@
 package servlets.commands;
 
-import model.Bonus;
 import servlets.FrontCommand;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShowTravelCompanyCommand extends FrontCommand {
     @Override

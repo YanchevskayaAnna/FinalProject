@@ -128,8 +128,12 @@ public class SQLDao<T,K> {
                         String methodName = "set" +
                                 Character.toUpperCase(tableColumn.getFieldName().charAt(0))
                                 + tableColumn.getFieldName().substring(1);
-                        Method setMethod = entityClass.getDeclaredMethod(methodName, tableColumn.columnType);
-                        if (setMethod == null) {setMethod = entityClass.getSuperclass().getDeclaredMethod(methodName, tableColumn.columnType);};
+                        Method setMethod;
+                        try {
+                            setMethod = entityClass.getDeclaredMethod(methodName, tableColumn.columnType);
+                        } catch (NoSuchMethodException e) {
+                            setMethod = entityClass.getSuperclass().getDeclaredMethod(methodName, tableColumn.columnType);
+                        }
                         setMethod.invoke(entity, columnValue);
                     }
                 }
