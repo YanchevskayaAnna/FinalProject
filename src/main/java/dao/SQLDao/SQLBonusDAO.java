@@ -1,14 +1,11 @@
 package dao.SQLDao;
 
 import dao.interfaces.IBonusDAO;
-import dao.interfaces.IClientDAO;
 import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SQLBonusDAO extends SQLDao<Bonus, Integer> implements IBonusDAO {
 

@@ -1,19 +1,21 @@
 CREATE DATABASE TravelCompany;
 USE TravelCompany;
 
-CREATE TABLE clients(
+CREATE TABLE users(
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  client_name VARCHAR (20),
-  client_phone VARCHAR (20),
-  client_mail VARCHAR (50)
+  user_role VARCHAR (20),
+  user_name VARCHAR (50),
+  user_phone VARCHAR (20),
+  user_email VARCHAR (50),
+  user_password VARCHAR (50)
 );
 
-INSERT INTO clients(client_name, client_phone, client_mail) VALUES ('Yanchevskaya Anna',  '+380672173946', 'yanchevskayaa@ukr.net');
-INSERT INTO clients(client_name, client_phone, client_mail) VALUES ('Savitskaya Ludmila',  '+380507885669', 'savitskaya@ukr.net');
-INSERT INTO clients(client_name, client_phone, client_mail) VALUES ('Ushenko Lidia',  '+33625432019', 'UshenkoLidia@gmail.com');
-INSERT INTO clients(client_name, client_phone, client_mail) VALUES ('Julien Male',  '81033625432019', 'lapoubelledemeuchu@gmail.com');
+INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Yanchevskaya Anna',  '+380672173946', 'yanchevskayaa@ukr.net', '');
+INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Savitskaya Ludmila',  '+380507885669', 'savitskaya@ukr.net', '');
+INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Ushenko Lidia',  '+33625432019', 'UshenkoLidia@gmail.com', '');
+INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Julien Male',  '81033625432019', 'lapoubelledemeuchu@gmail.com', '');
 
-SELECT * FROM clients;
+SELECT * FROM users;
 
 CREATE TABLE ships(
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY ,

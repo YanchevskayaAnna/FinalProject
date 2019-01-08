@@ -5,7 +5,6 @@ import dao.SQLDao.SQLDaoFactory;
 public abstract class DaoFactory {
     private static DaoFactory daoFactory;
 
-    public abstract IClientDAO createClientDao();
     public abstract ICruiseDAO createCruiseDao();
     public abstract IExcursionDAO createExcursionDao();
     public abstract IExcursionTicketDAO createExcursionTicketDao();
@@ -15,6 +14,7 @@ public abstract class DaoFactory {
     public abstract ICruiseRouteDAO createCruiseRouteDao();
     public abstract IBonusDAO createBonusDao();
     public abstract ITicketBonusesDAO createTicketBonusesDao();
+    public abstract IUserDAO createUserDao();
 
     public static DaoFactory getInstance(){
             if( daoFactory == null ){

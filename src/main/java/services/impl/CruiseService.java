@@ -1,14 +1,11 @@
 package services.impl;
 
-import dao.interfaces.IClientDAO;
 import dao.interfaces.ICruiseDAO;
 import model.Cruise;
-import model.Excursion;
 import services.interfaces.ICruiseService;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public class CruiseService implements ICruiseService {
     private ICruiseDAO cruiseDAO;

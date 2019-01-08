@@ -4,6 +4,7 @@ import dao.interfaces.ICruiseDAO;
 import model.Cruise;
 import model.CruiseRoute;
 import model.Excursion;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO {
+    private static final Logger LOGGER = Logger.getLogger(SQLCruiseDAO.class);
 
     public SQLCruiseDAO(Connection connection) {
         super(Cruise.class, Integer.class, connection);
@@ -52,6 +54,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
     @Override
     public boolean update(Cruise entity) {
 
+        LOGGER.info("update cruise");
         String sqlQuery = "UPDATE cruises SET cruise_name=?, cruise_number=? WHERE id=?";
 
         try {
@@ -69,7 +72,9 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
             preparedStatement.setInt(3, entity.getId());
 
             preparedStatement.execute();
+            LOGGER.info("cruise was saved");
         } catch (SQLException e) {
+            LOGGER.error("cruise was not saved", e);
             e.printStackTrace();
             return false;
         }
@@ -80,12 +85,14 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
     @Override
     public boolean create(Cruise entity) {
         String sqlQuery = "INSERT INTO cruises (cruise_name, cruise_number) VALUES (?,?)";
-
+        LOGGER.info("create cruise");
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getNumber());
             preparedStatement.execute();
+            LOGGER.info("cruise was saved");
         } catch (SQLException e) {
+            LOGGER.error("cruise was not saved", e);
             e.printStackTrace();
             return false;
         }
@@ -95,11 +102,14 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
     @Override
     public boolean delete(Cruise entity) {
         String sqlQuery = "DELETE FROM cruises WHERE id = ?";
+        LOGGER.info("delete cruise");
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, entity.getId());
             preparedStatement.execute();
+            LOGGER.info("cruise was deleted");
         } catch (SQLException e) {
+            LOGGER.error("cruise was not deleted", e);
             e.printStackTrace();
             return false;
         }

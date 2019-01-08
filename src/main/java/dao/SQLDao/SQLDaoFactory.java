@@ -35,11 +35,6 @@ public class SQLDaoFactory extends DaoFactory {
 
 
     @Override
-    public IClientDAO createClientDao() {
-        return new SQLClientDAO(getConnection());
-    }
-
-    @Override
     public ICruiseDAO createCruiseDao() {
         return new SQLCruiseDAO(getConnection());
     }
@@ -82,5 +77,10 @@ public class SQLDaoFactory extends DaoFactory {
     @Override
     public ITicketBonusesDAO createTicketBonusesDao() {
         return new SQLTicketBonusesDAO(getConnection());
+    }
+
+    @Override
+    public IUserDAO createUserDao() {
+        return new SQLUserDAO(getConnection());
     }
 }

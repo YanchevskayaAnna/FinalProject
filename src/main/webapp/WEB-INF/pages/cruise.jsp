@@ -2,14 +2,20 @@
 <html>
 <head>
      <fmt:setLocale value="${empty sessionScope.lang ? 'en' :sessionScope.lang}"/>
-     <fmt:setBundle basename="resources" var="bundle"/>
+     <fmt:setBundle basename="resources"/>
      <title>Cruise</title>
 </head>
 <body>
+     <form action="" method="post">
+         <input type="hidden" name="command" value="ChangeLanguage">
+         <button name="lang" type="submit" value="en">en</button>
+         <button name="lang" type="submit" value="ru">ru</button>
+         <button name="lang" type="submit" value="uk">ua</button>
+     </form>
 
     <div class="centerDiv" align="center">
          <h1>${cruiseName}</h1>
-         <h2><fmt:message key="CruiseRoute" bundle="${bundle}"/></h2>
+         <h2><fmt:message key="CruiseRoute"/></h2>
     </div>
 
     <c:set var="ports" value="${ports}"/>
@@ -34,6 +40,10 @@
             </c:forEach>
             </tbody>
         </table>
+    </div>
+
+    <div>
+         <a href="${pageContext.request.contextPath}/travelcompany"><fmt:message key="main"/></a>
     </div>
 
 </body>

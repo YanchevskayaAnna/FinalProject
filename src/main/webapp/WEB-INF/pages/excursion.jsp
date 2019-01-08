@@ -2,7 +2,7 @@
 <html>
 <head>
      <fmt:setLocale value="${empty sessionScope.lang ? 'en' :sessionScope.lang}"/>
-     <fmt:setBundle basename="resources" var="bundle"/>
+     <fmt:setBundle basename="resources"/>
      <title>Cruise excursions</title>
 </head>
 <body>
@@ -10,7 +10,7 @@
     <div class="centerDiv" align="center">
          <h1>${cruiseName}</h1>
          <h1>${portID}</h1>
-         <h2><fmt:message key="Excursions" bundle="${bundle}"/></h2>
+         <h2><fmt:message key="Excursions"/></h2>
     </div>
 
     <c:set var="excursions" value="${excursions}"/>
@@ -31,6 +31,10 @@
             </c:forEach>
             </tbody>
         </table>
+    </div>
+
+    <div>
+         <a href="${pageContext.request.contextPath}/travelcompany"><fmt:message key="main"/></a>
     </div>
 
 </body>

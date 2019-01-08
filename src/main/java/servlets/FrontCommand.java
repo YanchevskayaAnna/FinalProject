@@ -2,6 +2,7 @@ package servlets;
 
 import dao.interfaces.ICruiseRouteDAO;
 import services.interfaces.*;
+import servlets.actions.Action;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,11 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public abstract class FrontCommand {
+public abstract class FrontCommand implements Action{
     private ServletContext context;
     protected HttpServletRequest request;
-    private HttpServletResponse response;
-    protected IClientService clientService;
+    protected HttpServletResponse response;
     protected ICruiseService cruiseService;
     protected ICruiseRouteService cruiseRouteService;
     protected IExcursionService excursionService;
@@ -24,12 +24,12 @@ public abstract class FrontCommand {
     protected ITicketService ticketService;
     protected IBonusService bonusService;
     protected ITicketBonusesService ticketBonusesService;
+    protected IUserService userService;
 
     public void init(
             ServletContext servletContext,
             HttpServletRequest servletRequest,
             HttpServletResponse servletResponse,
-            IClientService clientService,
             ICruiseService cruiseService,
             ICruiseRouteService cruiseRouteService,
             IExcursionService excursionService,
@@ -38,12 +38,12 @@ public abstract class FrontCommand {
             IShipService shipService,
             ITicketService ticketService,
             IBonusService bonusService,
-            ITicketBonusesService ticketBonusesService) {
+            ITicketBonusesService ticketBonusesService,
+            IUserService userService) {
 
         this.context = servletContext;
         this.request = servletRequest;
         this.response = servletResponse;
-        this.clientService = clientService;
         this.cruiseService = cruiseService;
         this.cruiseRouteService = cruiseRouteService;
         this.excursionService = excursionService;
@@ -53,10 +53,9 @@ public abstract class FrontCommand {
         this.ticketService = ticketService;
         this.bonusService = bonusService;
         this.ticketBonusesService = ticketBonusesService;
+        this.userService = userService;
 
       }
-
-    public abstract void process() throws ServletException, IOException;
 
     protected void forward(String target) throws ServletException, IOException {
         target = String.format("/WEB-INF/pages/%s.jsp", target);

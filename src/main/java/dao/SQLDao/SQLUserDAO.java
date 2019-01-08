@@ -1,7 +1,9 @@
 package dao.SQLDao;
 
-import dao.interfaces.IClientDAO;
-import model.*;
+import dao.interfaces.IUserDAO;
+import model.Excursion;
+import model.User;
+import model.UserRole;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,19 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO {
+public class SQLUserDAO extends SQLDao<User, Integer> implements IUserDAO {
 
-    public SQLClientDAO(Connection connection) {
-        super(Client.class, Integer.class, connection);
+    public SQLUserDAO(Connection connection) {
+        super(User.class, Integer.class, connection);
     }
 
     @Override
-    public List<Client> getAll() {
+    public List<User> getAll() {
 
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM clients;");) {
-            List<Client> clientList = getAllClientsFromResultSet(resultSet);
-            return clientList;
+        try (Statement statement = connection.createStatement();) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users;");
+            List<User> userList = getAllUsersFromResultSet(resultSet);
+            return userList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -29,24 +31,26 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
         return null;
     }
 
-    public List<Client> getAllClientsFromResultSet(ResultSet resultSet) throws SQLException {
+    public List<User> getAllUsersFromResultSet(ResultSet resultSet) throws SQLException {
 
-        List<Client> clientList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         while (resultSet.next()) {
-            Client client = new Client();
-            client.setId(resultSet.getInt("id"));
-            client.setName(resultSet.getString("client_name"));
-            client.setMail(resultSet.getString("client_mail"));
-            client.setPhone(resultSet.getString("client_phone"));
-            clientList.add(client);
+            User user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setName(resultSet.getString("user_name"));
+            user.setPhone(resultSet.getString("user_phone"));
+            user.setEmail(resultSet.getString("user_email"));
+            user.setPassword(resultSet.getString("user_password"));
+            user.setRole(UserRole.valueOf(resultSet.getString("user_role")));
+            userList.add(user);
         }
-        return clientList;
+        return userList;
     }
 
     @Override
-    public boolean update(Client entity) {
+    public boolean update(User entity) {
 
-        String sqlQuery = "UPDATE clients SET client_name=?, client_mail=?, client_phone=?  WHERE id=?";
+        String sqlQuery = "UPDATE users SET user_name=?, user_mail=?, user_phone=?, user_role=?, user_password=?  WHERE id=?";
 
         try {
             if (getById(entity.getId()) == null) {
@@ -59,9 +63,11 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
 
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getMail());
+            preparedStatement.setString(2, entity.getEmail());
             preparedStatement.setString(3, entity.getPhone());
-            preparedStatement.setInt(4, entity.getId());
+            preparedStatement.setString(4, entity.getRole().name());
+            preparedStatement.setString(5, entity.getPassword());
+            preparedStatement.setInt(6, entity.getId());
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -73,13 +79,15 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
     }
 
     @Override
-    public boolean create(Client entity) {
-        String sqlQuery = "INSERT INTO clients (client_name, client_mail, client_phone) VALUES (?,?,?)";
+    public boolean create(User entity) {
+        String sqlQuery = "INSERT INTO users (user_name, user_email, user_phone, user_role, user_password) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getMail());
+            preparedStatement.setString(2, entity.getEmail());
             preparedStatement.setString(3, entity.getPhone());
+            preparedStatement.setString(4, entity.getRole().name());
+            preparedStatement.setString(5, entity.getPassword());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,8 +97,8 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
     }
 
     @Override
-    public boolean delete(Client entity) {
-        String sqlQuery = "DELETE FROM clients WHERE id = ?";
+    public boolean delete(User entity) {
+        String sqlQuery = "DELETE FROM users WHERE id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, entity.getId());
@@ -104,7 +112,22 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
     }
 
     @Override
-    public Map<Excursion, Boolean> defineExcursions(int idClient, int idCruise) {
+    public User getUser(String login, String password) {
+        String sqlQuery = "SELECT * FROM users WHERE users.user_email = ? & users.user_password = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> userList = getAllUsersFromResultSet(resultSet);
+            return userList.size() > 0 ? userList.get(0) : null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Map<Excursion, Boolean> defineExcursions(int idUser, int idCruise) {
         String sqlQuery = "SELECT excursions.*, excursions_tickets.id idTicket FROM excursions INNER JOIN cruise_routs ON excursions.excursion_id_port = cruise_routs.cruiserout_idport AND cruise_routs.cruiserout_idcruise = ?" +
                 "LEFT JOIN excursions_tickets ON excursions.id = excursions_tickets.excursionticket_idExcursion AND excursions_tickets.excursionticket_idclient = ?";
 
@@ -112,7 +135,7 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, idCruise);
-            preparedStatement.setInt(2, idClient);
+            preparedStatement.setInt(2, idUser);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Excursion excursion = new Excursion();
@@ -129,5 +152,4 @@ public class SQLClientDAO extends SQLDao<Client, Integer> implements IClientDAO 
         }
         return null;
     }
-
 }

@@ -3,7 +3,8 @@ package servlets;
 import dao.interfaces.DaoFactory;
 import services.impl.*;
 import services.interfaces.*;
-import servlets.commands.UnknownCommand;
+import servlets.actions.Action;
+import servlets.actions.ActionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,10 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/"})
 public class FrontControllerServlet extends HttpServlet {
 
-    private IClientService clientService;
+    private ActionFactory actionFactory = ActionFactory.getInstance();
+    private static final String REDIRECT = "redirect:";
+    private static final String FORMAT = "/WEB-INF/pages/%s.jsp";
+
     private ICruiseService cruiseService;
     private ICruiseRouteService cruiseRouteService;
     private IExcursionService excursionService;
@@ -27,11 +31,11 @@ public class FrontControllerServlet extends HttpServlet {
     private ITicketService ticketService;
     private IBonusService bonusService;
     private ITicketBonusesService ticketBonusesService;
+    private IUserService userService;
 
     @Override
     public void init() throws ServletException {
         DaoFactory factory = DaoFactory.getInstance();
-        clientService = new ClientService(factory.createClientDao());
         cruiseService = new CruiseService(factory.createCruiseDao());
         cruiseRouteService = new CruiseRouteService(factory.createCruiseRouteDao());
         excursionService = new ExcursionService(factory.createExcursionDao());
@@ -41,31 +45,33 @@ public class FrontControllerServlet extends HttpServlet {
         ticketService = new TicketService(factory.createTicketDao());
         bonusService = new BonusService(factory.createBonusDao());
         ticketBonusesService = new TicketBonusesService(factory.createTicketBonusesDao());
+        userService = new UserService(factory.createUserDao());
     }
 
     @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
-        FrontCommand command = getCommand(request);
-        command.init(getServletContext(), request, response, clientService, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketService, bonusService, ticketBonusesService);
-        command.process();
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response)
+            throws IOException, ServletException {
+        processRequest(request, response);
     }
 
-    private FrontCommand getCommand(HttpServletRequest request) {
-        try {
-            Class type = Class.forName(String.format(
-                    "servlets.commands.%sCommand",
-                    request.getParameter("command") == null ? "ShowTravelCompany" :request.getParameter("command")));
-            return (FrontCommand) type
-                    .asSubclass(FrontCommand.class)
-                    .newInstance();
-        } catch (Exception e) {
-            return new UnknownCommand();
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        processRequest(request, response);
+    }
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws  IOException, ServletException{
+        FrontCommand action = (FrontCommand) actionFactory.getAction(request);
+        action.init(getServletContext(), request, response, cruiseService, cruiseRouteService, excursionService, excursionTicketService, portService, shipService, ticketService, bonusService, ticketBonusesService, userService);
+        String view = action.execute(request, response);
+
+        if (view.startsWith(REDIRECT)) {
+            response.sendRedirect(request.getContextPath() + request.getServletPath()
+                    + view.substring(REDIRECT.length()));
+        } else {
+            request.getRequestDispatcher(String.format(FORMAT, view)).forward(request, response);
         }
     }
+
 }

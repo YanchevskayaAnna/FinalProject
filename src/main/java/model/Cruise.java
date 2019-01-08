@@ -33,8 +33,6 @@ public class Cruise extends _IDEntity{
         this.countOfDays = countOfDays;
     }
 
-    private List<Client> passengers;
-
     public String getName() {
         return name;
     }
@@ -81,14 +79,6 @@ public class Cruise extends _IDEntity{
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public List<Client> getPassengers() {
-        return passengers;
-    }
-
-    public void setPassengers(List<Client> passengers) {
-        this.passengers = passengers;
     }
 
     @Override

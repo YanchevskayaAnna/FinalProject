@@ -1,11 +1,7 @@
 package unit;
 
-import dao.SQLDao.SQLClientDAO;
-import model.Client;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import services.impl.ClientService;
-import services.interfaces.IClientService;
 
 import java.util.Arrays;
 
