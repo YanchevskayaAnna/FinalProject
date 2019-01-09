@@ -25,8 +25,10 @@ public class ActionFactory {
     private Action defaultAction = new ShowMainPage();
 
     {
-        actions.put("/cruise", new ShowCruiseDetails());
-        actions.put("/excursion", new ShowCruiseExcursions());
+        actions.put("/ShowCruiseDetails", new ShowCruiseDetails());
+        actions.put("ShowCruiseDetails", new ShowCruiseDetails());
+        actions.put("/ShowCruiseExcursions", new ShowCruiseExcursions());
+        actions.put("ShowCruiseExcursions", new ShowCruiseExcursions());
 
         actions.put("ShowLogin", new ShowLoginPage());
         actions.put("ShowRegistrationPage", new ShowRegistrationPage());
