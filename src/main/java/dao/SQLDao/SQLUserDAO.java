@@ -113,7 +113,7 @@ public class SQLUserDAO extends SQLDao<User, Integer> implements IUserDAO {
 
     @Override
     public User getUser(String login, String password) {
-        String sqlQuery = "SELECT * FROM users WHERE users.user_email = ? & users.user_password = ?";
+        String sqlQuery = "SELECT * FROM users WHERE users.user_email = ? AND users.user_password = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
