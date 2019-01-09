@@ -30,7 +30,7 @@ public class ActionFactory {
 
         actions.put("ShowLogin", new ShowLoginPage());
         actions.put("ShowRegistrationPage", new ShowRegistrationPage());
-
+        actions.put("/ShowRegistrationPage", new ShowRegistrationPage());
         actions.put("Login", new Login());
         actions.put("Register", new Register());
         actions.put("LogOut", new LogOut());
@@ -39,7 +39,7 @@ public class ActionFactory {
     }
 
     public Action getShowPageAction(HttpServletRequest request) {
-        String path = request.getPathInfo() == null ? "/" : request.getPathInfo();
+        String path = request.getServletPath() == null ? "/" : request.getServletPath();
         return actions.getOrDefault(path, defaultAction);
     }
 

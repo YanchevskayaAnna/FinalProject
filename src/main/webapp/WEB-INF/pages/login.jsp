@@ -39,10 +39,10 @@
            </div>
     </div>
     <div>
-         <a href="${pageContext.request.contextPath}/travelcompany/ShowRegistrationPage"><fmt:message key="Registration"/></a>
+         <a href="${pageContext.request.contextPath}/ShowRegistrationPage"><fmt:message key="Registration"/></a>
     </div>
     <div>
-         <a href="${pageContext.request.contextPath}/travelcompany"><fmt:message key="main"/></a>
+         <a href="${pageContext.request.contextPath}"><fmt:message key="main"/></a>
     </div>
 </body>
 </html>

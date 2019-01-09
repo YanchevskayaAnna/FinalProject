@@ -1,6 +1,11 @@
 <%@include file="include.jsp" %>
 <html>
 <head>
+   <style type="text/css">
+       .unsuccessful_attempt {
+        color: red;
+      }
+    </style>
      <fmt:setLocale value="${empty sessionScope.lang ? 'en' :sessionScope.lang}"/>
      <fmt:setBundle basename="resources"/>
      <title>Registration</title>
@@ -35,15 +40,15 @@
                 <label><fmt:message key="phone"/></label>
                 <input name="phone" type="phone">
            </div>
-           <button name="command" value="Registration" type="submit"><fmt:message key="SignUp"/></button>
+           <button name="command" value="Register" type="submit"><fmt:message key="SignUp"/></button>
      </form>
-     <div>
-         <c:if test="${invalid_data_entered}"><fmt:message key="${error_information}"/></c:if>
+     <div class="unsuccessful_attempt">
+         <c:if test="${invalid_data_entered}"><fmt:message key="error_information"/></c:if>
      </div>
     </div>
 
     <div>
-        <a href="${pageContext.request.contextPath}/travelcompany"><fmt:message key="main"/></a>
+        <a href="${pageContext.request.contextPath}/"><fmt:message key="main"/></a>
     </div>
 
 </body>
