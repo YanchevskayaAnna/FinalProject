@@ -6,10 +6,7 @@ import model.User;
 import model.UserRole;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SQLUserDAO extends SQLDao<User, Integer> implements IUserDAO {
 
@@ -28,7 +25,7 @@ public class SQLUserDAO extends SQLDao<User, Integer> implements IUserDAO {
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<User> getAllUsersFromResultSet(ResultSet resultSet) throws SQLException {
@@ -150,6 +147,6 @@ public class SQLUserDAO extends SQLDao<User, Integer> implements IUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return Collections.emptyMap();
     }
 }

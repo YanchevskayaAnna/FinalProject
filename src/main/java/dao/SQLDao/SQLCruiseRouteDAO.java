@@ -10,6 +10,7 @@ import model.dto.CruiseRouteDto;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<CruiseRoute> getAllCruisesFromResultSet(ResultSet resultSet) throws SQLException {
@@ -134,6 +135,6 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 }

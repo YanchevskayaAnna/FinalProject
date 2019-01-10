@@ -5,6 +5,7 @@ import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLBonusDAO extends SQLDao<Bonus, Integer> implements IBonusDAO {
@@ -24,7 +25,7 @@ public class SQLBonusDAO extends SQLDao<Bonus, Integer> implements IBonusDAO {
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Bonus> getAllBonusesFromResultSet(ResultSet resultSet) throws SQLException {

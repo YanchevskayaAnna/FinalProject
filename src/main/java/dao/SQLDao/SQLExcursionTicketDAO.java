@@ -5,6 +5,7 @@ import model.ExcursionTicket;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLExcursionTicketDAO extends SQLDao<ExcursionTicket, Integer> implements IExcursionTicketDAO {
@@ -24,7 +25,7 @@ public class SQLExcursionTicketDAO extends SQLDao<ExcursionTicket, Integer> impl
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<ExcursionTicket> getAllExcursionsFromResultSet(ResultSet resultSet) throws SQLException {

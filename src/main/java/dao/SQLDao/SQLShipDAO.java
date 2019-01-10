@@ -5,6 +5,7 @@ import model.Ship;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLShipDAO extends SQLDao<Ship, Integer> implements IShipDAO {
@@ -24,7 +25,7 @@ public class SQLShipDAO extends SQLDao<Ship, Integer> implements IShipDAO {
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Ship> getAllShipsFromResultSet(ResultSet resultSet) throws SQLException {

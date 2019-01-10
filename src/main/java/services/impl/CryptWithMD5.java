@@ -7,6 +7,7 @@ public class CryptWithMD5 {
     private static MessageDigest md;
 
     public static String cryptWithMD5(String pass){
+        if (pass.equals("")) {return "";}
         try {
             md = MessageDigest.getInstance("MD5");
             byte[] passBytes = pass.getBytes();

@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO {
@@ -28,7 +29,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Cruise> getAllCruisesFromResultSet(ResultSet resultSet) throws SQLException {
@@ -154,7 +155,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -169,7 +170,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -184,7 +185,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -197,7 +198,7 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<CruiseDto> getAllCruisesDtoFromResultSet(ResultSet resultSet) throws SQLException {

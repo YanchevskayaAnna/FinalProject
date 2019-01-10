@@ -16,6 +16,6 @@ public class ShowClientInfo extends FrontCommand {
         request.setAttribute("excursions", excursionService.defineExcursions(userID));
         request.setAttribute("UserLogIn", request.getSession().getAttribute("UserLogIn"));
         request.setAttribute("userName", request.getSession().getAttribute("userName"));
-        return "clientinfo";
+        return "client/clientinfo";
     }
 }

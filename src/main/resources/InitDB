@@ -14,6 +14,8 @@ INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) V
 INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Savitskaya Ludmila',  '+380507885669', 'savitskaya@ukr.net', '');
 INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Ushenko Lidia',  '+33625432019', 'UshenkoLidia@gmail.com', '');
 INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('CLIENT', 'Julien Male',  '81033625432019', 'lapoubelledemeuchu@gmail.com', '');
+INSERT INTO users(user_role, user_name, user_phone, user_email, user_password) VALUES ('ADMIN_SHIP', 'Julien Male',  '81033625432019', 'JM@gmail.com', '');
+
 
 SELECT * FROM users;
 

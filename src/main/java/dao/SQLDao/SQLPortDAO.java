@@ -6,6 +6,7 @@ import model.Port;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLPortDAO extends SQLDao<Port, Integer> implements IPortDAO {
@@ -25,7 +26,7 @@ public class SQLPortDAO extends SQLDao<Port, Integer> implements IPortDAO {
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Port> getAllPortsFromResultSet(ResultSet resultSet) throws SQLException {
@@ -123,7 +124,7 @@ public class SQLPortDAO extends SQLDao<Port, Integer> implements IPortDAO {
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
 }

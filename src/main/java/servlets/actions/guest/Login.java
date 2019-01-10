@@ -1,9 +1,9 @@
 package servlets.actions.guest;
 
 import model.User;
+import model.UserRole;
 import services.impl.CryptWithMD5;
 import servlets.FrontCommand;
-import servlets.actions.Action;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +22,15 @@ public class Login extends FrontCommand {
         if (user != null) {
             request.getSession().setAttribute("user", user); // Login user.
             request.getSession().setAttribute("userID", user.getId()); // Login user.
+            request.getSession().setAttribute("userRole", user.getRole());
             request.getSession().setAttribute("UserLogIn", true);
             request.getSession().setAttribute("userName", user.getName());
-            return "redirect:main/travelcompany"; // Redirect to home page.
+            return "redirect:/"; // Redirect to home page.
         }
         else {
             request.getSession().setAttribute("user", null); // Login user.
             request.getSession().setAttribute("userID", null); // Login user.
+            request.getSession().setAttribute("userRole", UserRole.GUEST);
             request.getSession().setAttribute("UserLogIn", false);
             request.getSession().setAttribute("userName", "");
             request.setAttribute("invalid_data_entered", true);

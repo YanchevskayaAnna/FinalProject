@@ -12,10 +12,8 @@ public class ShowAdminShipInfo extends FrontCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int userID =  Integer.parseInt(request.getSession().getAttribute("userID").toString());
         request.setAttribute("clientID", userID);
-        request.setAttribute("cruises", cruiseService.defineCruises(userID));
-        request.setAttribute("excursions", excursionService.defineExcursions(userID));
         request.setAttribute("UserLogIn", request.getSession().getAttribute("UserLogIn"));
         request.setAttribute("userName", request.getSession().getAttribute("userName"));
-        return "clientinfo";
+        return "adminship/adminshipinfo";
     }
 }

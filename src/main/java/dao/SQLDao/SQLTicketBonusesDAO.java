@@ -7,6 +7,7 @@ import model.TicketBonuses;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLTicketBonusesDAO extends SQLDao<TicketBonuses, Integer> implements ITicketBonusesDAO {
@@ -26,7 +27,7 @@ public class SQLTicketBonusesDAO extends SQLDao<TicketBonuses, Integer> implemen
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<TicketBonuses> getAllTicketsFromResultSet(ResultSet resultSet) throws SQLException {

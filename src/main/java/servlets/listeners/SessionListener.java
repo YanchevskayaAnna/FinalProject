@@ -9,7 +9,7 @@ public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-        httpSessionEvent.getSession().setAttribute("role", UserRole.GUEST);
+        httpSessionEvent.getSession().setAttribute("userRole", UserRole.GUEST);
         httpSessionEvent.getSession().setAttribute("lang", DEFAULT_LANG);
     }
 

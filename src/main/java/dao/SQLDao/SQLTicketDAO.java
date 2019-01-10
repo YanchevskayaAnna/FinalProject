@@ -7,6 +7,7 @@ import model.Ticket;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Ticket> getAllTicketsFromResultSet(ResultSet resultSet) throws SQLException {

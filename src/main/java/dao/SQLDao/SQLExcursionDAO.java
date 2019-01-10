@@ -8,6 +8,7 @@ import model.dto.ExcursionCruiseDto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcursionDAO {
@@ -27,7 +28,7 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Excursion> getAllExcursionsFromResultSet(ResultSet resultSet) throws SQLException {
@@ -116,7 +117,7 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
             e.printStackTrace();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -130,7 +131,7 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<ExcursionCruiseDto> getAllExcursionsDtoFromResultSet(ResultSet resultSet) throws SQLException {
@@ -170,6 +171,6 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return Collections.emptyList();
     }
 }
