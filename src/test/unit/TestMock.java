@@ -1,7 +1,12 @@
 package unit;
 
+import dao.SQLDao.SQLUserDAO;
+import model.User;
+import model.UserRole;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import services.impl.UserService;
+import services.interfaces.IUserService;
 
 import java.util.Arrays;
 
@@ -13,16 +18,16 @@ import static org.mockito.Mockito.when;
 
 public class TestMock {
 
-    private static IClientService clientService;
+    private static IUserService clientService;
 
     @BeforeClass
     public static void init() {
 
-        Client client1 = new Client("Test1", "test1@test.com", "+380679995561");
-        Client client2 = new Client("Test2", "test2@test.com", "+380679995562");
-        Client client3 = new Client("Test2", "test3@test.com", "+380679995563");
+        User client1 = new User("Test1", UserRole.CLIENT, "test1@test.com", "+380679995561");
+        User client2 = new User("Test2", UserRole.CLIENT, "test2@test.com", "+380679995562");
+        User client3 = new User("Test2", UserRole.CLIENT,  "test3@test.com", "+380679995563");
 
-        SQLClientDAO clientDao = mock(SQLClientDAO.class);
+        SQLUserDAO clientDao = mock(SQLUserDAO.class);
         when(clientDao.getAll()).thenReturn(
                 Arrays.asList(
                         client1, client2, client3));
@@ -31,13 +36,13 @@ public class TestMock {
         //when(clientDao.getById(2)).thenReturn(...)
         //when(clientDao.getAll()).thenThrow(new NullPointerException());
 
-        clientService = new ClientService(clientDao);
+        clientService = new UserService(clientDao);
     }
 
     @Test
     public void getAllClients() {
-        assertNotNull(clientService.getAllClients());
-        assertTrue(clientService.getAllClients().size() == 3);
+        assertNotNull(clientService.getAllUsers());
+        assertTrue(clientService.getAllUsers().size() == 3);
 
     }
 
