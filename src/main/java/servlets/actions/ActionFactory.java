@@ -36,6 +36,7 @@ public class ActionFactory {
         actions.put("ShowLoginPage", new ShowLoginPage());
         actions.put("/ShowLoginPage", new ShowLoginPage());
         actions.put("ShowRegistrationPage", new ShowRegistrationPage());
+        actions.put("/ShowRegistrationPage", new ShowRegistrationPage());
 
         actions.put("Login", new Login());
         actions.put("Register", new Register());
