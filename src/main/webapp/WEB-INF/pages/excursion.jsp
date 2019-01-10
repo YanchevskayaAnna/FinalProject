@@ -9,7 +9,7 @@
 
     <div class="centerDiv" align="center">
          <h1>${cruiseName}</h1>
-         <h1>${portID}</h1>
+         <h1>${portName}</h1>
          <h2><fmt:message key="Excursions"/></h2>
     </div>
 

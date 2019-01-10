@@ -14,6 +14,7 @@ public class ShowCruiseExcursions extends FrontCommand {
         request.setAttribute("cruiseName", request.getParameter("cruiseName"));
         request.setAttribute("cruiseID", request.getParameter("cruiseID"));
         request.setAttribute("portID", request.getParameter("portID"));
+        request.setAttribute("portName", request.getParameter("portName"));
         request.setAttribute("excursions", excursionService.getPortExcursions(Integer.parseInt(request.getParameter("portID"))));
         return "excursion";
     }

@@ -5,6 +5,7 @@ import dao.interfaces.ICruiseRouteDAO;
 import model.Cruise;
 import model.CruiseRoute;
 import model.Excursion;
+import model.dto.CruiseRouteDto;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -104,13 +105,30 @@ public class SQLCruiseRouteDAO extends SQLDao<CruiseRoute, Integer> implements I
         return true;
     }
 
+    public List<CruiseRouteDto> getAllCruisesDtoFromResultSet(ResultSet resultSet) throws SQLException {
+
+        List<CruiseRouteDto> cruiseList = new ArrayList<>();
+        while (resultSet.next()) {
+            CruiseRouteDto cruise = new CruiseRouteDto();
+            cruise.setId(resultSet.getInt("id"));
+            cruise.setIdCruise(resultSet.getInt("cruiserout_idcruise"));
+            cruise.setIdPort(resultSet.getInt("cruiserout_idport"));
+            cruise.setDateArrival(resultSet.getDate("cruiserout_dateStart").toLocalDate());
+            cruise.setPortName(resultSet.getString("port_name"));
+            cruise.setCruiseName(resultSet.getString("cruise_name"));
+            cruiseList.add(cruise);
+        }
+        return cruiseList;
+    }
+
+
     @Override
-    public List<CruiseRoute> getCruiseRoute(int cruiseID) {
-        String sqlQuery = "SELECT * FROM cruise_routs WHERE cruiserout_idcruise = ?";
+    public List<CruiseRouteDto> getCruiseRoute(int cruiseID) {
+        String sqlQuery = "SELECT * FROM cruise_routs Left Join ports ON cruise_routs.cruiserout_idport = ports.id Left Join cruises ON cruise_routs.cruiserout_idcruise = cruises.id WHERE cruiserout_idcruise = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, cruiseID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<CruiseRoute> CruiseRouteList = getAllCruisesFromResultSet(resultSet);
+            List<CruiseRouteDto> CruiseRouteList = getAllCruisesDtoFromResultSet(resultSet);
             return CruiseRouteList;
         } catch (SQLException e) {
             e.printStackTrace();

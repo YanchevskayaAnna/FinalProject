@@ -31,10 +31,10 @@
             <tbody id="tBody">
             <c:forEach items="${ports}" var="port">
                 <tr>
-                    <td align="center" style="border: 1px solid grey;">${port.idPort}</td>
+                    <td align="center" style="border: 1px solid grey;">${port.portName}</td>
                     <td align="center" style="border: 1px solid grey;">${port.dateArrival}</td>
                      <td align="center" style="border: 1px solid grey;">
-                         <a href="${pageContext.request.contextPath}/?command=ShowCruiseExcursions&cruiseID=${cruiseID}&cruiseName=${cruiseName}&portID=${port.idPort}"">Show excursions</a>
+                         <a href="${pageContext.request.contextPath}/?command=ShowCruiseExcursions&cruiseID=${cruiseID}&cruiseName=${cruiseName}&portID=${port.idPort}&portName=${port.portName}"">Show excursions</a>
                      </td>
                 </tr>
             </c:forEach>

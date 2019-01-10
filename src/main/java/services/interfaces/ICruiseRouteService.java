@@ -1,6 +1,8 @@
 package services.interfaces;
 
 import model.CruiseRoute;
+import model.dto.CruiseRouteDto;
+
 import java.util.List;
 
 public interface ICruiseRouteService {
@@ -10,5 +12,5 @@ public interface ICruiseRouteService {
     boolean createCruiseRoute(CruiseRoute cruiseRoute);
     boolean deleteCruiseRoute(CruiseRoute cruiseRoute);
     boolean deleteCruiseRouteById(Integer id);
-    List<CruiseRoute> getCruiseRoute(int cruiseID);
+    List<CruiseRouteDto> getCruiseRoute(int cruiseID);
 }

@@ -1,16 +1,11 @@
 package services.impl;
 
-import dao.interfaces.ICruiseDAO;
 import dao.interfaces.ICruiseRouteDAO;
-import model.Cruise;
 import model.CruiseRoute;
-import model.Excursion;
+import model.dto.CruiseRouteDto;
 import services.interfaces.ICruiseRouteService;
-import services.interfaces.ICruiseService;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public class CruiseRouteService implements ICruiseRouteService {
     private ICruiseRouteDAO cruiseRouteDAO;
@@ -50,7 +45,7 @@ public class CruiseRouteService implements ICruiseRouteService {
     }
 
     @Override
-    public List<CruiseRoute> getCruiseRoute(int cruiseID) {
+    public List<CruiseRouteDto> getCruiseRoute(int cruiseID) {
         return cruiseRouteDAO.getCruiseRoute(cruiseID);
     }
 }
