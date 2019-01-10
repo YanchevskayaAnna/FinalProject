@@ -1,6 +1,8 @@
 package servlets.filters;
 
 
+import model.UserRole;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/pay*")//Все страницы сайта обрабатывает данный фильтр
+@WebFilter("/ShowClientInfo")
 public class LoginFilter implements Filter {
 
     @Override
@@ -23,12 +25,12 @@ public class LoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
         //URL Запроса/переадресации на Servlet входа
-        String loginURI = request.getContextPath() + "/login"; //to do InviteServlet
+        String loginURI = request.getContextPath() + "/login";
         //Если сессия ранее создана
-        boolean loggedIn = session != null && session.getAttribute("userName") != null && session.getAttribute("userRole") != null;
+        boolean loggedIn = session != null && session.getAttribute("userRole") != null && UserRole.valueOf(session.getAttribute("userRole").toString()).equals(UserRole.CLIENT);
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         //Если запрос пришел со страницы с входом или сессия не пуста даем добро следовать дальше
-        //Если нет ридерект на страницу входа
+        //Если нет ридерект на страницу логина
         if (loggedIn || loginRequest) {
             filterChain.doFilter(request, response);
         } else {

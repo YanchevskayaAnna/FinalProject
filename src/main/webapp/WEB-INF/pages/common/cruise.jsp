@@ -34,6 +34,7 @@
 
     <div class="centerDiv" align="center">
          <h1>${cruiseName}</h1>
+         <h3><fmt:message key="Ship"/>:${ship}, <fmt:message key="ShipCapacity"/>: ${shipCapacity}, <fmt:message key="CountFreePlaces"/>:${countFreePlaces}</h3>
          <h2><fmt:message key="CruiseRoute"/></h2>
     </div>
 

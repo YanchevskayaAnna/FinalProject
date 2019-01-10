@@ -23,29 +23,23 @@ public class ActionFactory {
     private ActionFactory() {}
 
     private Map<String, Action> actions = new HashMap<>();
-    //private Action defaultAction = new RedirectHome(); TODO
     private Action defaultAction = new ShowMainPage();
 
     {
-        actions.put("/ShowCruiseDetails", new ShowCruiseDetails());
         actions.put("ShowCruiseDetails", new ShowCruiseDetails());
-        actions.put("/ShowCruiseExcursions", new ShowCruiseExcursions());
         actions.put("ShowCruiseExcursions", new ShowCruiseExcursions());
-        actions.put("ShowClientInfo", new ShowClientInfo());
-        actions.put("/ShowClientInfo", new ShowClientInfo()); //TODO разобраться с /
 
-        actions.put("ShowAdminShipInfo", new ShowAdminShipInfo());
-        actions.put("/ShowAdminShipInfo", new ShowAdminShipInfo()); //TODO разобраться с /
+        actions.put("/ShowUserInfo", new ShowUserInfo());
+        actions.put("/ShowClientInfo", new ShowClientInfo());
+        actions.put("/ShowAdminShipInfo", new ShowAdminShipInfo());
 
-        actions.put("ShowUserInfo", new ShowUserInfo());
-        actions.put("/ShowUserInfo", new ShowUserInfo()); //TODO разобраться с /
-
-        actions.put("ShowLogin", new ShowLoginPage());
+        actions.put("ShowLoginPage", new ShowLoginPage());
         actions.put("ShowRegistrationPage", new ShowRegistrationPage());
-        actions.put("/ShowRegistrationPage", new ShowRegistrationPage()); //TODO разобраться с /
+
         actions.put("Login", new Login());
         actions.put("Register", new Register());
         actions.put("LogOut", new LogOut());
+
         actions.put("ChangeLanguage", new ChangeLanguage());
     }
 
@@ -60,7 +54,7 @@ public class ActionFactory {
             return getShowPageAction(request);
         }
 
-        String path = request.getPathInfo() == null ? "/" : request.getPathInfo();
+        String path = request.getPathInfo() == null ? "/" : request.getPathInfo(); //TODO может getServletPath
         return actions.getOrDefault(command, actions.get(command + ":" + path));
     }
 }

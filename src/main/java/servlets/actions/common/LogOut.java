@@ -11,7 +11,7 @@ import java.io.IOException;
 public class LogOut extends FrontCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getSession().setAttribute("role", UserRole.GUEST);
+        request.getSession().setAttribute("userRole", UserRole.GUEST);
         request.getSession().setAttribute("user", null); // Login user.
         request.getSession().setAttribute("userID", null); // Login user.
         request.getSession().setAttribute("UserLogIn", false);

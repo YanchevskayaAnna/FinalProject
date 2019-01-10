@@ -1,11 +1,13 @@
 package servlets.filters;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.apache.log4j.Logger;
 
+@WebFilter("/*")
 public class RequestLoggerFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(RequestLoggerFilter.class);
 
@@ -23,7 +25,7 @@ public class RequestLoggerFilter implements Filter {
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
             LOG.info(String.format("User %s, request %s",
-                    req.getSession().getAttribute("currentUserName"),
+                    req.getSession().getAttribute("userName"),
                     req.getRequestURI()));
         }
 
