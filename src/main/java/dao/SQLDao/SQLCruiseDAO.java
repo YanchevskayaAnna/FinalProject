@@ -2,8 +2,6 @@ package dao.SQLDao;
 
 import dao.interfaces.ICruiseDAO;
 import model.Cruise;
-import model.CruiseRoute;
-import model.Excursion;
 import model.dto.CruiseDto;
 import org.apache.log4j.Logger;
 
@@ -11,7 +9,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO {
     private static final Logger LOGGER = Logger.getLogger(SQLCruiseDAO.class);

@@ -13,24 +13,31 @@ import java.util.Properties;
 
 public class SQLDaoFactory extends DaoFactory {
 
-    private static final String PROPERTIES_PATH = "src/main/resources/properties.example";
+    private static final String PROPERTIES_PATH = "src/main/resources/properties";
+    private Connection connection;
 
-    private Connection getConnection(){
-        try {
-            Properties properties = new Properties();
-            properties.load(new FileInputStream(new File(PROPERTIES_PATH)));
-            return DriverManager.getConnection(
-                    properties.getProperty("URL"),
-                    properties.getProperty("USER"),
-                    properties.getProperty("PASSWORD"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private Connection getConnection() {
+        if (connection == null) {
+            synchronized (SQLDaoFactory.class) {
+                if (connection == null) {
+                    try {
+                        Properties properties = new Properties();
+                        properties.load(new FileInputStream(new File(PROPERTIES_PATH)));
+                        return DriverManager.getConnection(
+                                properties.getProperty("URL"),
+                                properties.getProperty("USER"),
+                                properties.getProperty("PASSWORD"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
-        return null;
+        return connection;
     }
 
 
