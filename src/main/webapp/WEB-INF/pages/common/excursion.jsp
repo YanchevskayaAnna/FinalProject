@@ -1,4 +1,4 @@
-<%@include file="include.jsp" %>
+<%@include file="/WEB-INF/pages/service/include.jsp" %>
 <html>
 <head>
      <fmt:setLocale value="${empty sessionScope.lang ? 'en' :sessionScope.lang}"/>

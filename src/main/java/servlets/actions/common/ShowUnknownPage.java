@@ -10,6 +10,6 @@ import java.io.IOException;
 public class ShowUnknownPage extends FrontCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return "unknown";
+        return "service/unknown";
     }
 }

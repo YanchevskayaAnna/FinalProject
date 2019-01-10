@@ -13,6 +13,6 @@ public class ShowCruiseDetails extends FrontCommand {
         request.setAttribute("cruiseName", request.getParameter("cruiseName"));
         request.setAttribute("cruiseID", request.getParameter("cruiseID"));
         request.setAttribute("ports", cruiseRouteService.getCruiseRoute(Integer.parseInt(request.getParameter("cruiseID"))));
-        return "cruise";
+        return "common/cruise";
     }
 }

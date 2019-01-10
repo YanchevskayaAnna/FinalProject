@@ -10,6 +10,6 @@ import java.io.IOException;
 public class RedirectHome extends FrontCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return "redirect:/travelcompany";
+        return "redirect:/main/travelcompany";
 }
 }

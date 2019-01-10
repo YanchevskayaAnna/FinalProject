@@ -13,6 +13,6 @@ public class ShowMainPage extends FrontCommand {
         request.setAttribute("cruises", cruiseService.getAllCruisesDto());
         request.setAttribute("UserLogIn", request.getSession().getAttribute("UserLogIn"));
         request.setAttribute("userName", request.getSession().getAttribute("userName"));
-        return "travelcompany";
+        return "main/travelcompany";
     }
 }

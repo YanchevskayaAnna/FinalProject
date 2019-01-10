@@ -28,11 +28,11 @@ public class Register extends FrontCommand {
                 return new ShowLoginPage().execute(request, response);
             } else {
                 request.setAttribute("invalid_data_entered", true);
-                return "registration";
+                return "login&registration/registration";
             }
         } else {
             request.setAttribute("invalid_data_entered", true);
-            return "registration";
+            return "login&registration/registration";
         }
     }
 

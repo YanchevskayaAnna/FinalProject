@@ -24,7 +24,7 @@ public class Login extends FrontCommand {
             request.getSession().setAttribute("userID", user.getId()); // Login user.
             request.getSession().setAttribute("UserLogIn", true);
             request.getSession().setAttribute("userName", user.getName());
-            return "redirect:travelcompany"; // Redirect to home page.
+            return "redirect:main/travelcompany"; // Redirect to home page.
         }
         else {
             request.getSession().setAttribute("user", null); // Login user.
@@ -32,7 +32,7 @@ public class Login extends FrontCommand {
             request.getSession().setAttribute("UserLogIn", false);
             request.getSession().setAttribute("userName", "");
             request.setAttribute("invalid_data_entered", true);
-            return "login"; // Go back to redisplay login form with error.
+            return "login&registration/login"; // Go back to redisplay login form with error.
         }
     }
 
