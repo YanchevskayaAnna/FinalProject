@@ -49,6 +49,9 @@
                 <th style="border: 2px solid grey;">Date start</th>
                 <th style="border: 2px solid grey;">Date finish</th>
                 <th style="border: 2px solid grey;">Count of days</th>
+                <th style="border: 2px solid grey;">Ship</th>
+                <th style="border: 2px solid grey;">Ship capacity</th>
+                <th style="border: 2px solid grey;">Number of free places</th>
             </tr>
             </thead>
             <tbody id="tBody">
@@ -60,6 +63,9 @@
                     <td align="center" style="border: 1px solid grey;">${cruise.dateStart}</td>
                     <td align="center" style="border: 1px solid grey;">${cruise.dateFinish}</td>
                     <td align="center" style="border: 1px solid grey;">${cruise.countOfDays}</td>
+                    <td align="center" style="border: 1px solid grey;">${cruise.shipName}</td>
+                    <td align="center" style="border: 1px solid grey;">${cruise.shipCapacity}</td>
+                    <td align="center" style="border: 1px solid grey;">${cruise.countFreePlaces}</td>
                 </tr>
             </c:forEach>
             </tbody>

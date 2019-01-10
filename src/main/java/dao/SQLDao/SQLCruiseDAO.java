@@ -4,6 +4,7 @@ import dao.interfaces.ICruiseDAO;
 import model.Cruise;
 import model.CruiseRoute;
 import model.Excursion;
+import model.dto.CruiseDto;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -175,18 +176,52 @@ public class SQLCruiseDAO extends SQLDao<Cruise, Integer> implements ICruiseDAO 
     }
 
     @Override
-    public List<Cruise> defineCruises(int idClient) {
-        String sqlQuery = "SELECT * FROM cruises INNER JOIN tickets ON cruises.id = tickets.ticket_idcruise AND tickets.ticket_idclient = ?";
+    public List<CruiseDto> defineCruises(int idClient) {
+        String sqlQuery = "SELECT  cruises.*, ships.id ship_id, ships.ship_name, ships.ship_passengercapacity FROM cruises iNNER JOIN ships ON cruises.cruise_idShip = ships.id INNER JOIN tickets ON cruises.id = tickets.ticket_idcruise AND tickets.ticket_idclient = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, idClient);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Cruise> cruiseList = getAllCruisesFromResultSet(resultSet);
+            List<CruiseDto> cruiseList = getAllCruisesDtoFromResultSet(resultSet);
             return cruiseList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    @Override
+    public List<CruiseDto> getAllCruisesDto() {
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT cruises.*, ships.id ship_id, ships.ship_name, ships.ship_passengercapacity FROM cruises iNNER JOIN ships ON cruises.cruise_idShip = ships.id;");) {
+            List<CruiseDto> cruiseList = getAllCruisesDtoFromResultSet(resultSet);
+            return cruiseList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<CruiseDto> getAllCruisesDtoFromResultSet(ResultSet resultSet) throws SQLException {
+
+        List<CruiseDto> cruiseList = new ArrayList<>();
+        while (resultSet.next()) {
+            CruiseDto cruise = new CruiseDto();
+            cruise.setId(resultSet.getInt("id"));
+            cruise.setName(resultSet.getString("cruise_name"));
+            cruise.setNumber(resultSet.getString("cruise_number"));
+            cruise.setPrice(resultSet.getInt("cruise_price"));
+            cruise.setCountOfDays(resultSet.getInt("cruise_countdays"));
+            cruise.setShipID(resultSet.getInt("ship_id"));
+            cruise.setShipName(resultSet.getString("ship_name"));
+            cruise.setShipCapacity(resultSet.getInt("ship_passengercapacity"));
+            cruise.setCountFreePlaces(countNumberEmptySeats(resultSet.getInt("id")));
+            cruise.setDateStart(resultSet.getDate("cruise_dateStart").toLocalDate());
+            cruise.setDateFinish(resultSet.getDate("cruise_dateFinish").toLocalDate());
+            cruiseList.add(cruise);
+        }
+        return cruiseList;
     }
 
 

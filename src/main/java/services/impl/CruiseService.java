@@ -2,6 +2,7 @@ package services.impl;
 
 import dao.interfaces.ICruiseDAO;
 import model.Cruise;
+import model.dto.CruiseDto;
 import services.interfaces.ICruiseService;
 
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public class CruiseService implements ICruiseService {
     }
 
     @Override
-    public List<Cruise> defineCruises(int idClient) {
+    public List<CruiseDto> defineCruises(int idClient) {
         return cruiseDAO.defineCruises(idClient);
     }
 
@@ -67,5 +68,10 @@ public class CruiseService implements ICruiseService {
     @Override
     public boolean deleteCruiseById(Integer id) {
         return cruiseDAO.deleteById(id);
+    }
+
+    @Override
+    public List<CruiseDto> getAllCruisesDto() {
+        return cruiseDAO.getAllCruisesDto();
     }
 }
