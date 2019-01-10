@@ -1,3 +1,14 @@
+Variant № 8
+Cruise Company.
+The Company has several ships.
+The ships have a passenger capacity, route, number of ports visited,
+the duration of one cruise, the staff. The client chooses and pays the cruise.
+Selects guided tours upon arrival at the port for an additional fee.
+The client can choose excursions for an additional fee upon arrival at the port..
+Ship Administrator indicates bonuses for passengers, considering ticket class
+(swimming pool, gym, cinema, beauty salons ...).
+
+_________________________________________________________________________________
 Вариант № 8
 Система Круизная Компания.
 У Компании имеется несколько Кораблей.
