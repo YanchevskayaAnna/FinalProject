@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class SQLDaoFactory extends DaoFactory {
 
-    private static final String PROPERTIES_PATH = "src/main/resources/properties";
+    private static final String PROPERTIES_PATH = "src/main/resources/properties.example";
 
     private Connection getConnection(){
         try {

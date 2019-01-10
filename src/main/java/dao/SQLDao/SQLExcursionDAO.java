@@ -1,7 +1,10 @@
 package dao.SQLDao;
 
 import dao.interfaces.IExcursionDAO;
+import model.Cruise;
 import model.Excursion;
+import model.Port;
+import model.dto.ExcursionCruiseDto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -123,6 +126,46 @@ public class SQLExcursionDAO extends SQLDao<Excursion, Integer> implements IExcu
             preparedStatement.setInt(1, cruiseID);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Excursion> excursionList = getAllExcursionsFromResultSet(resultSet);
+            return excursionList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<ExcursionCruiseDto> getAllExcursionsDtoFromResultSet(ResultSet resultSet) throws SQLException {
+
+        List<ExcursionCruiseDto> excursionList = new ArrayList<>();
+        while (resultSet.next()) {
+            ExcursionCruiseDto excursion = new ExcursionCruiseDto();
+            excursion.setId(resultSet.getInt("id"));
+            excursion.setName(resultSet.getString("excursion_name"));
+            excursion.setPrice(resultSet.getInt("excursion_price"));
+            excursion.setPortID(resultSet.getInt("port_id"));
+            excursion.setPortName(resultSet.getString("port_name"));
+            excursion.setCruiseID(resultSet.getInt("cruise_id"));
+            excursion.setCruiseName(resultSet.getString("cruise_name"));
+            //excursion.setIdPort(resultSet.getInt("excursion_id_port"));
+            excursionList.add(excursion);
+        }
+        return excursionList;
+    }
+
+    @Override
+    public List<ExcursionCruiseDto> defineExcursions(int clientID) {
+        String sqlQuery =
+                "Select excursions.id, excursions.excursion_name, excursions.excursion_price," +
+                 " ports.id port_id, ports.port_name, " +
+                        "cruises.id cruise_id, cruises.cruise_name  from excursions_tickets \n" +
+                "LEFT JOIN excursions ON excursions_tickets.excursionticket_idExcursion = excursions.id \n" +
+                "LEFT JOIN cruises ON excursions_tickets. excursionticket_idcruise\n" +
+                " = cruises.id\n" +
+                "LEFT JOIN ports ON excursions.excursion_id_port  = ports.id\n" +
+                "WHERE excursions_tickets.excursionticket_idclient = ?;\n";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
+            preparedStatement.setInt(1, clientID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<ExcursionCruiseDto> excursionList = getAllExcursionsDtoFromResultSet(resultSet);
             return excursionList;
         } catch (SQLException e) {
             e.printStackTrace();

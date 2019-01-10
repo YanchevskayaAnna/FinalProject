@@ -21,12 +21,14 @@ public class Login extends FrontCommand {
 
         if (user != null) {
             request.getSession().setAttribute("user", user); // Login user.
+            request.getSession().setAttribute("userID", user.getId()); // Login user.
             request.getSession().setAttribute("UserLogIn", true);
             request.getSession().setAttribute("userName", user.getName());
             return "redirect:travelcompany"; // Redirect to home page.
         }
         else {
             request.getSession().setAttribute("user", null); // Login user.
+            request.getSession().setAttribute("userID", null); // Login user.
             request.getSession().setAttribute("UserLogIn", false);
             request.getSession().setAttribute("userName", "");
             request.setAttribute("invalid_data_entered", true);

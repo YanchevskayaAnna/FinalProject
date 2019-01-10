@@ -1,5 +1,6 @@
 package servlets.actions;
 
+import servlets.actions.client.ShowClientInfo;
 import servlets.actions.common.*;
 import servlets.actions.guest.Login;
 import servlets.actions.guest.Register;
@@ -29,6 +30,8 @@ public class ActionFactory {
         actions.put("ShowCruiseDetails", new ShowCruiseDetails());
         actions.put("/ShowCruiseExcursions", new ShowCruiseExcursions());
         actions.put("ShowCruiseExcursions", new ShowCruiseExcursions());
+        actions.put("ShowClientInfo", new ShowClientInfo());
+        actions.put("/ShowClientInfo", new ShowClientInfo()); //to do разобраться с /
 
         actions.put("ShowLogin", new ShowLoginPage());
         actions.put("ShowRegistrationPage", new ShowRegistrationPage());

@@ -2,6 +2,7 @@ package services.impl;
 
 import dao.interfaces.IExcursionDAO;
 import model.Excursion;
+import model.dto.ExcursionCruiseDto;
 import services.interfaces.IExcursionService;
 
 import java.util.List;
@@ -51,5 +52,10 @@ public class ExcursionService implements IExcursionService {
     @Override
     public List<Excursion> findCruiseExcursions(int cruiseID) {
         return excursionDAO.findCruiseExcursions(cruiseID);
+    }
+
+    @Override
+    public List<ExcursionCruiseDto> defineExcursions(int clientID) {
+        return excursionDAO.defineExcursions(clientID);
     }
 }
