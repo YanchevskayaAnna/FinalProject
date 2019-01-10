@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/ShowClientInfo")
+@WebFilter({"/ShowClientInfo", "/ShowUserInfo", "/ShowAdminShipInfo"})
 public class LoginFilter implements Filter {
 
     @Override
@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
         //URL Запроса/переадресации на Servlet входа
-        String loginURI = request.getContextPath() + "/login";
+        String loginURI = request.getContextPath() + "/ShowLoginPage";
         //Если сессия ранее создана
         boolean loggedIn = session != null && session.getAttribute("userRole") != null && UserRole.valueOf(session.getAttribute("userRole").toString()).equals(UserRole.CLIENT);
         boolean loginRequest = request.getRequestURI().equals(loginURI);

@@ -13,24 +13,24 @@
          <button name="lang" type="submit" value="uk">ua</button>
      </form>
 
-      <c:choose>
-           <c:when test="${UserLogIn}">
-               <form action="" method="post">
-                  <div class="" align="right">
-                      <a href="${pageContext.request.contextPath}/ShowUserInfo">${userName}</a>
-                      <button name="command" type="submit" value="LogOut"><fmt:message key="LogOut"/></button>
-                  </div>
+    <c:choose>
+          <c:when test="${UserLogIn}">
+              <form method="post">
+                 <div align="right">
+                     <a href="${pageContext.request.contextPath}/ShowUserInfo">${userName}</a>
+                     <button name="command" type="submit" value="LogOut"><fmt:message key="LogOut"/></button>
+                 </div>
+              </form>
+          </c:when>
+          <c:otherwise>
+               <form method="post">
+                   <div align="right">
+                      <button name="command" type="submit" value="ShowLoginPage"><fmt:message key="LogIn"/></button>
+                      <button name="command" type="submit" value="ShowRegistrationPage" ><fmt:message key="SignUp"/></button>
+                   </div>
                </form>
-           </c:when>
-           <c:otherwise>
-                <form action="" method="post">
-                    <div align="right">
-                       <button name="command" type="submit" value="ShowLoginPage"><fmt:message key="LogIn"/></button>
-                       <button name="command" type="submit" value="ShowRegistrationPage" ><fmt:message key="SignUp"/></button>
-                    </div>
-                </form>
-          </c:otherwise>
-        </c:choose>
+         </c:otherwise>
+       </c:choose>
 
     <div class="centerDiv" align="center">
          <h1>${cruiseName}</h1>

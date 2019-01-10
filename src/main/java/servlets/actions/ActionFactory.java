@@ -34,6 +34,7 @@ public class ActionFactory {
         actions.put("/ShowAdminShipInfo", new ShowAdminShipInfo());
 
         actions.put("ShowLoginPage", new ShowLoginPage());
+        actions.put("/ShowLoginPage", new ShowLoginPage());
         actions.put("ShowRegistrationPage", new ShowRegistrationPage());
 
         actions.put("Login", new Login());
@@ -44,8 +45,7 @@ public class ActionFactory {
     }
 
     public Action getShowPageAction(HttpServletRequest request) {
-        String path = request.getServletPath() == null ? "/" : request.getServletPath();
-        return actions.getOrDefault(path, defaultAction);
+        return actions.getOrDefault(request.getServletPath(), defaultAction);
     }
 
     public Action getAction(HttpServletRequest request) {
@@ -53,9 +53,7 @@ public class ActionFactory {
         if (command == null) {
             return getShowPageAction(request);
         }
-
-        String path = request.getPathInfo() == null ? "/" : request.getPathInfo(); //TODO может getServletPath
-        return actions.getOrDefault(command, actions.get(command + ":" + path));
+        return actions.getOrDefault(command, defaultAction);
     }
 }
 
