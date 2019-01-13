@@ -7,16 +7,16 @@
 </head>
 <body>
 
-      <form action="" method="post">
-             <input type="hidden" name="command" value="ChangeLanguage">
-             <button name="lang" type="submit" value="en">en</button>
-             <button name="lang" type="submit" value="ru">ru</button>
-             <button name="lang" type="submit" value="uk">ua</button>
-      </form>
+  <form action="" method="post">
+        <input type="hidden" onClick="document.location.reload(true)">
+        <button name="lang" type="submit" value="en">en</button>
+        <button name="lang" type="submit" value="ru">ru</button>
+        <button name="lang" type="submit" value="uk">ua</button>
+  </form>
 
 <c:choose>
       <c:when test="${UserLogIn}">
-          <form action="" method="post">
+          <form action="ShowCruiseExcursions" method="post">
              <div class="" align="right">
                  <a href="${pageContext.request.contextPath}/ShowUserInfo">${userName}</a>
                  <button name="command" type="submit" value="LogOut"><fmt:message key="LogOut"/></button>
@@ -24,7 +24,7 @@
           </form>
       </c:when>
       <c:otherwise>
-           <form action="" method="post">
+           <form action="ShowCruiseExcursions" method="post">
                <div class="" align="right">
                   <button name="command" type="submit" value="ShowLoginPage"><fmt:message key="LogIn"/></button>
                   <button name="command" type="submit" value="ShowRegistrationPage" ><fmt:message key="SignUp"/></button>
@@ -33,13 +33,11 @@
      </c:otherwise>
    </c:choose>
 
-
     <div class="centerDiv" align="center">
          <h1>${cruiseName}</h1>
          <h1>${portName}</h1>
          <h2><fmt:message key="Excursions"/></h2>
     </div>
-
 
     <c:set var="excursions" value="${excursions}"/>
     <div align="center" style="width: 1024px; margin: 30px auto; ">

@@ -27,7 +27,9 @@ public class ActionFactory {
 
     {
         actions.put("ShowCruiseDetails", new ShowCruiseDetails());
+        actions.put("/ShowCruiseDetails", new ShowCruiseDetails());
         actions.put("ShowCruiseExcursions", new ShowCruiseExcursions());
+        actions.put("/ShowCruiseExcursions", new ShowCruiseExcursions());
 
         actions.put("/ShowUserInfo", new ShowUserInfo());
         actions.put("/ShowClientInfo", new ShowClientInfo());

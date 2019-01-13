@@ -67,8 +67,8 @@ public class FrontControllerServlet extends HttpServlet {
         String view = action.execute(request, response);
 
         if (view.startsWith(REDIRECT)) {
-            response.sendRedirect(request.getContextPath() + view.substring(REDIRECT.length())); //TODO зачем здесь request.getServletPath()? request.getContextPath() + request.getServletPath()
-        } else {
+            response.sendRedirect(request.getContextPath() + view.substring(REDIRECT.length()));
+        } else if (!view.equals("")){
             request.getRequestDispatcher(String.format(FORMAT, view)).forward(request, response);
         }
     }

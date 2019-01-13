@@ -11,6 +11,9 @@ public class ShowCruiseExcursions extends FrontCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if (!(request.getParameter("lang") == null)){
+            request.getSession().setAttribute("lang", request.getParameter("lang"));
+        }
         request.setAttribute("cruiseName", request.getParameter("cruiseName"));
         request.setAttribute("cruiseID", request.getParameter("cruiseID"));
         request.setAttribute("portID", request.getParameter("portID"));

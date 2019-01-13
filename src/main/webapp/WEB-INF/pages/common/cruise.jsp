@@ -6,8 +6,8 @@
      <title>Cruise</title>
 </head>
 <body>
-     <form action="" method="post">
-         <input type="hidden" name="command" value="ChangeLanguage">
+     <form method="post" action="">
+         <input type="hidden" onClick="document.location.reload(true)">
          <button name="lang" type="submit" value="en">en</button>
          <button name="lang" type="submit" value="ru">ru</button>
          <button name="lang" type="submit" value="uk">ua</button>
@@ -15,18 +15,21 @@
 
     <c:choose>
           <c:when test="${UserLogIn}">
-              <form method="post">
+
                  <div align="right">
+                  <form method="post" action="ShowUserInfo">
                      <a href="${pageContext.request.contextPath}/ShowUserInfo">${userName}</a>
                      <button name="command" type="submit" value="LogOut"><fmt:message key="LogOut"/></button>
+                 <form/>
                  </div>
               </form>
           </c:when>
           <c:otherwise>
-               <form method="post">
                    <div align="right">
+                   <form method="post" action="ShowLoginRegistrationPage">
                       <button name="command" type="submit" value="ShowLoginPage"><fmt:message key="LogIn"/></button>
                       <button name="command" type="submit" value="ShowRegistrationPage" ><fmt:message key="SignUp"/></button>
+                    <form/>
                    </div>
                </form>
          </c:otherwise>

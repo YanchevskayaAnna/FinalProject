@@ -13,6 +13,7 @@ public class ChangeLanguage extends FrontCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().setAttribute("lang", request.getParameter("lang"));
-        return ActionFactory.getInstance().getShowPageAction(request).execute(request, response);
-}
+        //return ActionFactory.getInstance().getShowPageAction(request).execute(request, response);
+        return "redirect:" + request.getServletPath();
+    }
 }

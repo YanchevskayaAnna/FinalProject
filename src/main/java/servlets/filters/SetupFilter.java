@@ -19,7 +19,7 @@ public class SetupFilter implements Filter {
         servletRequest.setCharacterEncoding("UTF-8");
         servletRequest.setAttribute("lang",
                 ((HttpServletRequest) servletRequest).getSession().getAttribute("lang"));
-        filterChain.doFilter(servletRequest, servletResponse); // TODO Зачем? Разве не везде из сессии?
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

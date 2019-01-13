@@ -12,7 +12,7 @@
 </head>
 <body>
 
-   <form action="" method="post">
+   <form action="ShowLoginPage" method="post">
        <input type="hidden" name="command" value="ChangeLanguage">
        <button name="lang" type="submit" value="en">en</button>
        <button name="lang" type="submit" value="ru">ru</button>

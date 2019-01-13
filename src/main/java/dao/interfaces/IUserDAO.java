@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IUserDAO extends IAbstractDAO<User> {
+
     User getUser(String login, String password);
     Map<Excursion, Boolean> defineExcursions(int idUser, int idCruise);
 
