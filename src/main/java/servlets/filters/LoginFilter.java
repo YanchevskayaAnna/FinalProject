@@ -27,7 +27,12 @@ public class LoginFilter implements Filter {
         //URL Запроса/переадресации на Servlet входа
         String loginURI = request.getContextPath() + "/ShowLoginPage";
         //Если сессия ранее создана
-        boolean loggedIn = session != null && session.getAttribute("userRole") != null && UserRole.valueOf(session.getAttribute("userRole").toString()).equals(UserRole.CLIENT);
+        boolean loggedIn = session != null && session.getAttribute("userRole") != null &&
+                (
+                        (UserRole.valueOf(session.getAttribute("userRole").toString()).equals(UserRole.CLIENT))
+                                ||
+                                (UserRole.valueOf(session.getAttribute("userRole").toString()).equals(UserRole.ADMIN_SHIP))
+                );
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         //Если запрос пришел со страницы с входом или сессия не пуста даем добро следовать дальше
         //Если нет ридерект на страницу логина
