@@ -107,7 +107,10 @@ public class SQLTicketDAO extends SQLDao<Ticket, Integer> implements ITicketDAO 
 
     @Override
     public int definePrice(int idCruise, List<Bonus> bonusList) {
-        String bonusID = bonusList.stream().map(bonus ->bonus.getId().toString()).collect(Collectors.joining(", "));
+        String bonusID = bonusList.stream()
+                .map(Bonus::getId)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
         String sqlQuery = "SELECT (MAX(cruises.cruise_price) + SUM(bonuses.bonus_price)) price FROM cruises LEFT JOIN  bonuses ON bonuses.id IN (" +  bonusID + ") WHERE cruises.id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
             preparedStatement.setInt(1, idCruise);

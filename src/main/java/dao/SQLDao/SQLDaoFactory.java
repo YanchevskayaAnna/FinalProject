@@ -40,7 +40,6 @@ public class SQLDaoFactory extends DaoFactory {
         return connection;
     }
 
-
     @Override
     public ICruiseDAO createCruiseDao() {
         return new SQLCruiseDAO(getConnection());
